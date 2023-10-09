@@ -1,0 +1,30 @@
+=====
+Single line comment
+=====
+
+# comment
+// comment
+
+---
+
+(typoscript
+  (single_line_comment)
+  (single_line_comment))
+
+
+=====
+Multi line comment
+=====
+
+/* comment
+over
+multiple
+lines
+*/
+
+---
+
+(typoscript
+  (comment))
+
+

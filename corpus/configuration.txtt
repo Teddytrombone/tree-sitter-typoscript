@@ -1,0 +1,126 @@
+====
+Reference assignment
+====
+
+foo =< bar
+
+---
+(typoscript
+  (reference_line
+    (identifier)
+    (reference_identifier)))
+
+
+
+====
+Reference assignment with whitespace
+====
+
+foo = < bar
+
+---
+(typoscript
+  (reference_line
+    (identifier)
+    (reference_identifier)))
+
+
+
+====
+Copy
+====
+
+foo < bar
+
+---
+(typoscript
+  (copy_line
+    (identifier)
+    (copy_identifier)
+    ))
+
+====
+Copy with comment
+====
+
+foo < bar # Something
+
+---
+(typoscript
+  (copy_line
+    (identifier)
+    (copy_identifier)
+    (single_line_comment)
+    ))
+
+
+====
+Deletion
+====
+
+foo >
+
+---
+(typoscript
+  (deletion_line
+    (identifier)
+    ))
+
+
+====
+Deletion with comment
+====
+
+foo > # Something
+
+---
+(typoscript
+  (deletion_line
+    (identifier)
+    (single_line_comment)))
+
+
+====
+Modification
+====
+
+foo:=addToList(123)
+
+---
+(typoscript
+  (modification_line
+    (identifier)
+    (modifier_function)
+    (modifier_parameters
+      (modifier_parameter))))
+
+====
+Modification with comment
+====
+
+foo := addToList(123) # Something
+
+---
+(typoscript
+  (modification_line
+    (identifier)
+    (modifier_function)
+    (modifier_parameters
+      (modifier_parameter))
+  (single_line_comment)))
+
+
+====
+Modification with brace 
+====
+
+foo := addToList(x-inf()
+
+---
+(typoscript
+  (modification_line
+    (identifier)
+    (modifier_function)
+    (modifier_parameters
+      (modifier_parameter))))
+  

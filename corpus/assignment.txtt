@@ -1,0 +1,85 @@
+====
+Assignment
+====
+
+foo = bar
+
+---
+(typoscript
+  (assignment_line
+    (identifier)
+    (value)))
+
+
+====
+Nested assignment
+====
+
+foo.bar = baz
+
+---
+(typoscript
+  (assignment_line
+    (identifier)
+    (value)))
+
+
+====
+Double nested assignment
+====
+
+foo.bar.baz = baz
+
+---
+(typoscript
+  (assignment_line
+    (identifier)
+    (value)))
+
+
+
+====
+Assignment with comment (comment has to be treated as part of the value)
+====
+
+foo = bar # comment
+
+---
+(typoscript
+  (assignment_line
+    (identifier)
+    (value)))
+
+
+
+====
+Assignment with multiline value 
+====
+
+foo = (
+bar
+)
+
+---
+(typoscript
+  (assignment_line
+    (identifier)
+    (multiline_value)))
+
+
+
+====
+Assignment with multiline value and constant 
+====
+
+foo = (
+bar {$test} baz
+foobar
+)
+
+---
+(typoscript
+  (assignment_line
+    (identifier)
+    (multiline_value
+      (constant))))

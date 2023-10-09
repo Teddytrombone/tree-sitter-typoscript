@@ -1,0 +1,78 @@
+
+====
+Include old syntax
+====
+
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:foo/Configuration/TypoScript/setup.typoscript">
+
+---
+(typoscript
+  (import_legacy
+    (string)))
+
+
+====
+Include old syntax, no space
+====
+
+<INCLUDE_TYPOSCRIPT:source="FILE:EXT:foo/Configuration/TypoScript/setup.typoscript">
+
+---
+(typoscript
+  (import_legacy
+    (string)))
+
+
+
+====
+Include old syntax with extensions
+====
+
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:foo/Configuration/TypoScript/setup.typoscript" extensions="typoscript">
+
+---
+(typoscript
+  (import_legacy
+    (string)
+    (condition_attribute)
+    (string)))
+
+
+====
+Include old syntax with condition
+====
+
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:foo/Configuration/TypoScript/setup.typoscript" condition="YourVendor\YourPackage\YourCondition">
+
+---
+(typoscript
+  (import_legacy
+    (string)
+    (condition_attribute)
+    (string)))
+
+
+
+====
+Import new syntax single quotes
+====
+
+@import 'EXT:foo/Configuration/TypoScript/setup.typoscript'
+
+---
+(typoscript
+  (import
+    (string)))
+
+
+====
+Import new syntax double quotes
+====
+
+@import "EXT:foo/Configuration/TypoScript/setup.typoscript"
+
+---
+(typoscript
+  (import
+    (string)))
+
