@@ -8,6 +8,10 @@
       "required": true,
       "types": [
         {
+          "type": "cobject",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
@@ -47,6 +51,14 @@
           "named": true
         },
         {
+          "type": "condition_bool",
+          "named": true
+        },
+        {
+          "type": "condition_predefined",
+          "named": true
+        },
+        {
           "type": "configuration_block",
           "named": true
         },
@@ -82,7 +94,50 @@
     }
   },
   {
+    "type": "bracket_parameter",
+    "named": false,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "condition_bool",
+          "named": true
+        },
+        {
+          "type": "constant",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "condition",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "condition_bool",
+          "named": true
+        },
+        {
+          "type": "constant",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "condition_bool",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "condition_predefined",
     "named": true,
     "fields": {}
   },
@@ -161,6 +216,21 @@
     }
   },
   {
+    "type": "function",
+    "named": false,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "modifier_parameter",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "import",
     "named": true,
     "fields": {},
@@ -216,6 +286,10 @@
         },
         {
           "type": "modifier_parameters",
+          "named": true
+        },
+        {
+          "type": "modifier_predefined",
           "named": true
         },
         {
@@ -333,6 +407,14 @@
           "named": true
         },
         {
+          "type": "condition_bool",
+          "named": true
+        },
+        {
+          "type": "condition_predefined",
+          "named": true
+        },
+        {
           "type": "configuration_block",
           "named": true
         },
@@ -391,6 +473,10 @@
     "named": false
   },
   {
+    "type": "&&",
+    "named": false
+  },
+  {
     "type": "'",
     "named": false
   },
@@ -431,7 +517,15 @@
     "named": false
   },
   {
+    "type": "AND",
+    "named": false
+  },
+  {
     "type": "INCLUDE_TYPOSCRIPT",
+    "named": false
+  },
+  {
+    "type": "OR",
     "named": false
   },
   {
@@ -444,6 +538,10 @@
   },
   {
     "type": "block_punctuation",
+    "named": true
+  },
+  {
+    "type": "cobject",
     "named": true
   },
   {
@@ -467,6 +565,10 @@
     "named": true
   },
   {
+    "type": "modifier_predefined",
+    "named": true
+  },
+  {
     "type": "reference_identifier",
     "named": true
   },
@@ -480,6 +582,10 @@
   },
   {
     "type": "{$",
+    "named": false
+  },
+  {
+    "type": "||",
     "named": false
   },
   {

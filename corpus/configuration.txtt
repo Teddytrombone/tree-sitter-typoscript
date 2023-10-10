@@ -90,7 +90,7 @@ foo:=addToList(123)
 (typoscript
   (modification_line
     (identifier)
-    (modifier_function)
+    (modifier_predefined)
     (modifier_parameters
       (modifier_parameter))))
 
@@ -104,17 +104,17 @@ foo := addToList(123) # Something
 (typoscript
   (modification_line
     (identifier)
-    (modifier_function)
+    (modifier_predefined)
     (modifier_parameters
       (modifier_parameter))
   (single_line_comment)))
 
 
 ====
-Modification with brace 
+Modification with brace and user defined function
 ====
 
-foo := addToList(x-inf()
+foo := addToListTest(x-inf())
 
 ---
 (typoscript

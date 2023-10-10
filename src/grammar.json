@@ -18,7 +18,7 @@
       "members": [
         {
           "type": "PATTERN",
-          "value": "\\s*\\n"
+          "value": "\\n"
         },
         {
           "type": "SYMBOL",
@@ -50,7 +50,11 @@
         },
         {
           "type": "SYMBOL",
-          "name": "condition"
+          "name": "condition_predefined"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_condition_segment"
         },
         {
           "type": "SYMBOL",
@@ -79,6 +83,10 @@
             {
               "type": "CHOICE",
               "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "cobject"
+                },
                 {
                   "type": "SYMBOL",
                   "name": "value"
@@ -217,8 +225,17 @@
           "value": ":="
         },
         {
-          "type": "SYMBOL",
-          "name": "modifier_function"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "modifier_predefined"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "modifier_function"
+            }
+          ]
         },
         {
           "type": "SYMBOL",
@@ -255,6 +272,48 @@
         }
       ]
     },
+    "_condition_segment": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "condition"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "condition_bool"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "condition_bool": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "&&"
+        },
+        {
+          "type": "STRING",
+          "value": "||"
+        },
+        {
+          "type": "STRING",
+          "value": "AND"
+        },
+        {
+          "type": "STRING",
+          "value": "OR"
+        }
+      ]
+    },
     "condition": {
       "type": "SEQ",
       "members": [
@@ -263,12 +322,54 @@
           "value": "["
         },
         {
-          "type": "PATTERN",
-          "value": "[^\\]]*"
+          "type": "SYMBOL",
+          "name": "_condition_inner"
         },
         {
           "type": "STRING",
           "value": "]"
+        }
+      ]
+    },
+    "_condition_inner": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "constant"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "condition_bool"
+          },
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "condition"
+            },
+            "named": false,
+            "value": "bracket_parameter"
+          },
+          {
+            "type": "PATTERN",
+            "value": "[^\\]]"
+          }
+        ]
+      }
+    },
+    "condition_predefined": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "\\[(end|else|global)\\]"
+        },
+        {
+          "type": "STRING",
+          "value": "\n"
         }
       ]
     },
@@ -376,6 +477,14 @@
       "type": "PATTERN",
       "value": "((?:\\.)|(?:[a-zA-Z0-9_\\-\\\\]+(?:\\.[a-zA-Z0-9_\\-\\\\]*)*))"
     },
+    "cobject": {
+      "type": "PATTERN",
+      "value": "CASE|COA|COA_INT|CONTENT|EDITPANEL|FILE|FILES|FLUIDTEMPLATE|HMENU|TMENU|IMAGE|IMG_RESOURCE|LOAD_REGISTER|RECORDS|RESTORE_REGISTER|SVG|TEMPLATE|TEXT|USER|USER_INT|PAGE|EXTBASEPLUGIN"
+    },
+    "modifier_predefined": {
+      "type": "PATTERN",
+      "value": "(prepend|append|remove|replace)String|(addTo|removeFrom|unique|reverse|sort)List"
+    },
     "modifier_function": {
       "type": "PATTERN",
       "value": "[a-zA-Z0-9_\\-\\\\]+"
@@ -438,6 +547,15 @@
           {
             "type": "PATTERN",
             "value": "[^,\\)]"
+          },
+          {
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "modifier_parameters"
+            },
+            "named": false,
+            "value": "function"
           }
         ]
       }

@@ -2,9 +2,16 @@
 
 (constant) @constant
 
+(modifier_function) @function
+(condition) @function
+(condition_predefined) @function
+
+
 [
   "@import"
   "INCLUDE_TYPOSCRIPT"
+  (modifier_predefined)
+  (cobject)
 ] @keyword
 
 [
@@ -22,6 +29,7 @@
   ">"
   "<"
   ":="
+  (condition_bool)
 ] @operator
 
 [

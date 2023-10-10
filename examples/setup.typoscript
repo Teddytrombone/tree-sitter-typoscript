@@ -6,6 +6,7 @@
 @import 'EXT:fluid_styled_content'
 
 foo := addToList(543,6754,3423, {$constant.test})
+foo := userdefined(bar())
 
 # Content element rendering
 tt_content {
@@ -35,5 +36,21 @@ test = (
   Wie geht es dir
 )
 
+page = PAGE
+page {
+    10 = FLUIDTEMPLATE
+    10 {
 
+    }
+}
 
+[applicationContext matches "/^Development/"]
+page.10.1 = TEXT
+page.10.1.value = Test
+[else]
+page.10.1 >
+[global]
+
+[frontend.user.isLoggedIn == 1 || getTSFE().id == 75 && siteLanguage("title") == "English"]
+page.20 = TEXT
+[GLOBAL]

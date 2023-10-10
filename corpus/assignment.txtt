@@ -4,11 +4,16 @@ Assignment
 
 foo = bar
 
+page = PAGE
+
 ---
 (typoscript
   (assignment_line
     (identifier)
-    (value)))
+    (value))
+  (assignment_line
+    (identifier)
+    (cobject)))
 
 
 ====
