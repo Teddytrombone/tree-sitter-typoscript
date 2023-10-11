@@ -1,5 +1,5 @@
 {
-  "name": "TypoScript",
+  "name": "typoscript",
   "rules": {
     "typoscript": {
       "type": "REPEAT",

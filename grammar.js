@@ -1,5 +1,5 @@
 module.exports = grammar({
-    name: 'TypoScript',
+    name: 'typoscript',
 
     extras: $ => [/[\t ]/],
 
