@@ -3,8 +3,9 @@
 (constant) @constant
 
 (modifier_function) @function
-(condition) @function
-(condition_predefined) @function
+(condition) @function.condition
+(condition_end) @function.condition
+(condition_else) @function.condition
 
 
 [

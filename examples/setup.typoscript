@@ -51,6 +51,10 @@ page.10.1.value = Test
 page.10.1 >
 [global]
 
+[applicationContext matches "/^Development/"]
+page.10.1 = TEXT
+page.10.1.value = Test
+
 [frontend.user.isLoggedIn == 1 || getTSFE().id == 75 && siteLanguage("title") == "English"]
 page.20 = TEXT
 [GLOBAL]

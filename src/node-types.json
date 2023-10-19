@@ -47,18 +47,6 @@
           "named": true
         },
         {
-          "type": "condition",
-          "named": true
-        },
-        {
-          "type": "condition_bool",
-          "named": true
-        },
-        {
-          "type": "condition_predefined",
-          "named": true
-        },
-        {
           "type": "configuration_block",
           "named": true
         },
@@ -132,12 +120,80 @@
     }
   },
   {
+    "type": "condition_block",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "assignment_line",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "condition",
+          "named": true
+        },
+        {
+          "type": "condition_bool",
+          "named": true
+        },
+        {
+          "type": "condition_else",
+          "named": true
+        },
+        {
+          "type": "configuration_block",
+          "named": true
+        },
+        {
+          "type": "copy_line",
+          "named": true
+        },
+        {
+          "type": "deletion_line",
+          "named": true
+        },
+        {
+          "type": "import",
+          "named": true
+        },
+        {
+          "type": "import_legacy",
+          "named": true
+        },
+        {
+          "type": "modification_line",
+          "named": true
+        },
+        {
+          "type": "reference_line",
+          "named": true
+        },
+        {
+          "type": "single_line_comment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "condition_bool",
     "named": true,
     "fields": {}
   },
   {
-    "type": "condition_predefined",
+    "type": "condition_else",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "condition_end",
     "named": true,
     "fields": {}
   },
@@ -403,15 +459,11 @@
           "named": true
         },
         {
-          "type": "condition",
+          "type": "condition_block",
           "named": true
         },
         {
-          "type": "condition_bool",
-          "named": true
-        },
-        {
-          "type": "condition_predefined",
+          "type": "condition_end",
           "named": true
         },
         {

@@ -9,6 +9,14 @@
           {
             "type": "SYMBOL",
             "name": "_block_item"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "condition_block"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "condition_end"
           }
         ]
       }
@@ -47,14 +55,6 @@
         {
           "type": "SYMBOL",
           "name": "_imports"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "condition_predefined"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_condition_segment"
         },
         {
           "type": "SYMBOL",
@@ -331,6 +331,71 @@
         }
       ]
     },
+    "condition_block": {
+      "type": "PREC_RIGHT",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "_condition_line"
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "REPEAT1",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_block_item"
+                }
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "_condition_line": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "condition_else"
+            },
+            {
+              "type": "REPEAT1",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_condition_segment"
+              }
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_comments"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": "\n"
+        }
+      ]
+    },
     "_condition_inner": {
       "type": "REPEAT1",
       "content": {
@@ -360,12 +425,21 @@
         ]
       }
     },
-    "condition_predefined": {
+    "condition_else": {
       "type": "SEQ",
       "members": [
         {
           "type": "PATTERN",
-          "value": "\\[(end|else|global)\\]"
+          "value": "\\[[eE][lL][sS][eE]\\]"
+        }
+      ]
+    },
+    "condition_end": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "\\[([eE][nN][dD]|[gG][lL][oO][bB][aA][lL])\\]"
         },
         {
           "type": "STRING",

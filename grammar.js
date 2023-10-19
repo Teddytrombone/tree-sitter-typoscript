@@ -1,3 +1,18 @@
+function toCaseInsensitive(a) {
+    var ca = a.charCodeAt(0);
+    if (ca >= 97 && ca <= 122) return `[${a}${a.toUpperCase()}]`;
+    if (ca >= 65 && ca <= 90) return `[${a.toLowerCase()}${a}]`;
+    return a;
+}
+
+function caseInsensitive(keyword) {
+    return new RegExp(keyword
+        .split('')
+        .map(toCaseInsensitive)
+        .join('')
+    )
+}
+
 module.exports = grammar({
     name: 'typoscript',
 
@@ -6,7 +21,9 @@ module.exports = grammar({
     rules: {
 
         typoscript: $ => repeat(choice(
-            $._block_item
+            $._block_item,
+            $.condition_block,
+            $.condition_end
         )),
 
         _block_item: $ => choice(
@@ -18,8 +35,6 @@ module.exports = grammar({
             $.copy_line,
             $.configuration_block,
             $._imports,
-            $.condition_predefined,
-            $._condition_segment,
             $.comment,
             $.single_line_comment
         ),
@@ -42,9 +57,15 @@ module.exports = grammar({
 
         condition: $ => seq('[', $._condition_inner, ']'),
 
+        condition_block: $ => prec.right(seq($._condition_line, optional(repeat1($._block_item)))),
+
+        _condition_line: $ => seq(choice($.condition_else, repeat1($._condition_segment)), optional($._comments), '\n'),
+
         _condition_inner: $ => repeat1(choice($.constant, $.condition_bool, alias($.condition, 'bracket_parameter'), /[^\]]/)),
 
-        condition_predefined: $ => seq(/\[(end|else|global)\]/i, '\n'),
+        condition_else: $ => seq(caseInsensitive('\\[else\\]')),
+
+        condition_end: $ => seq(caseInsensitive('\\[(end|global)\\]'), '\n'),
 
         block: $ => seq(alias('{', $.block_punctuation), repeat($._block_item), alias('}', $.block_punctuation)),
 
