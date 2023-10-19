@@ -1,27 +1,27 @@
 {
-  "name": "tree-sitter-typoscript",
-  "version": "0.0.1",
-  "description": "",
-  "main": "bindings/node",
-  "scripts": {
-    "build": "tree-sitter generate && node-gyp build"
-  },
-  "author": "Manfred Egger",
-  "license": "MIT",
-  "dependencies": {
-    "nan": "^2.18.0"
-  },
-  "devDependencies": {
-    "tree-sitter-cli": "^0.20.8"
-  },
-  "tree-sitter": [
-    {
-      "scope": "typoscript",
-      "file-types": [
-        "typoscript",
-        "tsconfig"
-      ],
-      "injection-regex": "typoscript"
-    }
-  ]
+    "name": "tree-sitter-typoscript",
+    "version": "0.0.2",
+    "description": "",
+    "main": "bindings/node",
+    "scripts": {
+        "build": "tree-sitter generate && node-gyp build"
+    },
+    "author": "Manfred Egger",
+    "license": "MIT",
+    "dependencies": {
+        "nan": "^2.18.0"
+    },
+    "devDependencies": {
+        "tree-sitter-cli": "^0.20.8"
+    },
+    "tree-sitter": [
+        {
+            "scope": "typoscript",
+            "file-types": [
+                "typoscript",
+                "tsconfig"
+            ],
+            "injection-regex": "typoscript"
+        }
+    ]
 }
