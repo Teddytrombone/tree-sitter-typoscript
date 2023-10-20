@@ -1,19 +1,28 @@
-(identifier) @type
+(identifier) @property
 
 (constant) @constant
 
 (modifier_function) @function
-(condition) @function.condition
-(condition_end) @function.condition
-(condition_else) @function.condition
+(modifier_predefined) @function.builtin
+
+[
+  (condition) 
+  (condition_end) 
+  (condition_else)
+] @conditional
 
 
 [
   "@import"
   "INCLUDE_TYPOSCRIPT"
-  (modifier_predefined)
-  (cobject)
 ] @keyword
+
+(cobject) @type.builtin
+
+[
+  "@import"
+  "INCLUDE_TYPOSCRIPT"
+] @include
 
 [
   (comment)

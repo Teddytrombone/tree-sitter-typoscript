@@ -51,7 +51,7 @@ page.10.1.value = Test
 page.10.1 >
 [global]
 
-[applicationContext matches "/^Development/"]
+[applicationContext matches "/^Development/"] AND [Condition]
 page.10.1 = TEXT
 page.10.1.value = Test
 
