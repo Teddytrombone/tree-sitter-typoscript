@@ -31,6 +31,7 @@ module.exports = grammar({
             $.modification_line,
             $.reference_line,
             $.assignment_line,
+            $.multiline_line,
             $.deletion_line,
             $.copy_line,
             $.configuration_block,
@@ -39,7 +40,9 @@ module.exports = grammar({
             $.single_line_comment
         ),
 
-        assignment_line: $ => seq($.identifier, '=', optional(choice($.cobject, $.value, $.multiline_value)), '\n'),
+        assignment_line: $ => seq($.identifier, '=', optional(choice($.cobject, $.value)), '\n'),
+
+        multiline_line: $ => seq($.identifier, $.multiline_value, '\n'),
 
         deletion_line: $ => seq($.identifier, '>', optional($._comments), '\n'),
 

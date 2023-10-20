@@ -1,0 +1,4 @@
+
+plugin.tx_frontend._CSS_DEFAULT_STYLE (
+    .ce-align-left { text-align: left; }
+)

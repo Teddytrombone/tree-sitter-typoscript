@@ -31,7 +31,7 @@ tt_content.media.test {
   hallo = welt
 }
 
-test = (
+test (
   Hallo Welt
   Das ist {$eine} Konstante
   Wie geht es dir

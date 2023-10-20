@@ -56,18 +56,30 @@ foo = bar # comment
     (value)))
 
 
+====
+Assignment with parenthese like multiline value but isn't 
+====
+
+foo = (
+
+---
+(typoscript
+  (assignment_line
+    (identifier)
+    (value)))
+
 
 ====
 Assignment with multiline value 
 ====
 
-foo = (
+foo (
 bar
 )
 
 ---
 (typoscript
-  (assignment_line
+  (multiline_line
     (identifier)
     (multiline_value)))
 
@@ -77,14 +89,14 @@ bar
 Assignment with multiline value and constant 
 ====
 
-foo = (
+foo (
 bar {$test} baz
 foobar
 )
 
 ---
 (typoscript
-  (assignment_line
+  (multiline_line
     (identifier)
     (multiline_value
       (constant))))

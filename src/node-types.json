@@ -16,10 +16,6 @@
           "named": true
         },
         {
-          "type": "multiline_value",
-          "named": true
-        },
-        {
           "type": "value",
           "named": true
         }
@@ -68,6 +64,10 @@
         },
         {
           "type": "modification_line",
+          "named": true
+        },
+        {
+          "type": "multiline_line",
           "named": true
         },
         {
@@ -169,6 +169,10 @@
         },
         {
           "type": "modification_line",
+          "named": true
+        },
+        {
+          "type": "multiline_line",
           "named": true
         },
         {
@@ -386,6 +390,25 @@
     }
   },
   {
+    "type": "multiline_line",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "multiline_value",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "multiline_value",
     "named": true,
     "fields": {},
@@ -488,6 +511,10 @@
         },
         {
           "type": "modification_line",
+          "named": true
+        },
+        {
+          "type": "multiline_line",
           "named": true
         },
         {

@@ -42,6 +42,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "multiline_line"
+        },
+        {
+          "type": "SYMBOL",
           "name": "deletion_line"
         },
         {
@@ -90,10 +94,6 @@
                 {
                   "type": "SYMBOL",
                   "name": "value"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "multiline_value"
                 }
               ]
             },
@@ -101,6 +101,23 @@
               "type": "BLANK"
             }
           ]
+        },
+        {
+          "type": "STRING",
+          "value": "\n"
+        }
+      ]
+    },
+    "multiline_line": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "multiline_value"
         },
         {
           "type": "STRING",
