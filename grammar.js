@@ -1,18 +1,3 @@
-function toCaseInsensitive(a) {
-    var ca = a.charCodeAt(0);
-    if (ca >= 97 && ca <= 122) return `[${a}${a.toUpperCase()}]`;
-    if (ca >= 65 && ca <= 90) return `[${a.toLowerCase()}${a}]`;
-    return a;
-}
-
-function caseInsensitive(keyword) {
-    return new RegExp(keyword
-        .split('')
-        .map(toCaseInsensitive)
-        .join('')
-    )
-}
-
 module.exports = grammar({
     name: 'typoscript',
 
@@ -42,7 +27,7 @@ module.exports = grammar({
 
         assignment_line: $ => seq($.identifier, '=', optional(choice($.cobject, $.value)), '\n'),
 
-        multiline_line: $ => seq($.identifier, $.multiline_value, '\n'),
+        multiline_line: $ => seq($.identifier, $.multiline_value, optional($._comments), '\n'),
 
         deletion_line: $ => seq($.identifier, '>', optional($._comments), '\n'),
 
@@ -76,7 +61,7 @@ module.exports = grammar({
 
         value: $ => repeat1(choice(/[^\n]/, $.constant)),
 
-        multiline_value: $ => stringWithConstants($, '(', ')', ')', true),
+        multiline_value: $ => seq('(', repeat(seq(optional(repeat1(choice($.constant, /[^\n]/))), '\n')), ')'),
 
         identifier: $ => /((?:\.)|(?:[a-zA-Z0-9_\-\\]+(?:\.[a-zA-Z0-9_\-\\]*)*))/,
 
@@ -97,8 +82,8 @@ module.exports = grammar({
         single_line_comment: $ => token(seq(choice("#", "//"), /.*/)),
 
         string: $ => choice(
-            stringWithConstants($, '"'),
-            stringWithConstants($, '\'')
+            stringWithConstantsSeq($, '"'),
+            stringWithConstantsSeq($, '\'')
         ),
 
         _imports: $ => choice($.import_legacy, $.import),
@@ -109,17 +94,22 @@ module.exports = grammar({
     }
 });
 
-function stringWithConstants($, startString, endString, endStringForRegex) {
+function repeatedStringWithConstants($, stringForRegex, dontEscape) {
+    var regex = '[^' + (dontEscape === true ? '' : '\\') + stringForRegex + ']';
+    return optional(repeat1(choice(
+        $.constant,
+        new RegExp(regex)
+    )));
+}
+
+function stringWithConstantsSeq($, startString, endString, endStringForRegex) {
     if (typeof (endString) === 'undefined') {
         endString = startString;
     }
     if (typeof (endStringForRegex) === 'undefined') {
         endStringForRegex = endString;
     }
-    return seq(startString, optional(repeat1(choice(
-        $.constant,
-        new RegExp('[^\\' + endStringForRegex + ']')
-    ))), endString);
+    return seq(startString, repeatedStringWithConstants($, endStringForRegex), endString);
 }
 
 function sep(separator, rule) {
@@ -128,4 +118,20 @@ function sep(separator, rule) {
 
 function sep1(separator, rule) {
     return seq(rule, repeat(seq(separator, rule)));
+
 }
+function toCaseInsensitive(a) {
+    var ca = a.charCodeAt(0);
+    if (ca >= 97 && ca <= 122) return `[${a}${a.toUpperCase()}]`;
+    if (ca >= 65 && ca <= 90) return `[${a.toLowerCase()}${a}]`;
+    return a;
+}
+
+function caseInsensitive(keyword) {
+    return new RegExp(keyword
+        .split('')
+        .map(toCaseInsensitive)
+        .join('')
+    )
+}
+

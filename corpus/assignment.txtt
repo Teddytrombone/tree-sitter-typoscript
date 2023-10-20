@@ -100,3 +100,20 @@ foobar
     (identifier)
     (multiline_value
       (constant))))
+
+
+====
+Assignment with multiline value and parentheses inline
+====
+
+foo (
+bar (baz
+foobar)
+test
+)
+
+---
+(typoscript
+  (multiline_line
+    (identifier)
+    (multiline_value)))

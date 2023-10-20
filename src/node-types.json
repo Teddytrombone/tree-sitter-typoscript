@@ -398,11 +398,19 @@
       "required": true,
       "types": [
         {
+          "type": "comment",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
         {
           "type": "multiline_value",
+          "named": true
+        },
+        {
+          "type": "single_line_comment",
           "named": true
         }
       ]
