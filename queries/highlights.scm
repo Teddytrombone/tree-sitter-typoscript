@@ -1,4 +1,4 @@
-(identifier) @property
+(identifier) @field
 
 (constant) @constant
 
