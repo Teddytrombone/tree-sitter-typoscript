@@ -117,7 +117,7 @@ static const char * const ts_symbol_names[] = {
   [anon_sym_LF] = "\n",
   [anon_sym_GT] = ">",
   [anon_sym_LT] = "<",
-  [aux_sym_reference_line_token1] = "reference_line_token1",
+  [aux_sym_reference_line_token1] = "=<",
   [anon_sym_COLON_EQ] = ":=",
   [anon_sym_AMP_AMP] = "&&",
   [anon_sym_PIPE_PIPE] = "||",
@@ -310,7 +310,7 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .named = false,
   },
   [aux_sym_reference_line_token1] = {
-    .visible = false,
+    .visible = true,
     .named = false,
   },
   [anon_sym_COLON_EQ] = {

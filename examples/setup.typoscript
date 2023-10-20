@@ -26,6 +26,7 @@ tt_content {
     test = {$constant.test}
 }
 
+tt_content.media.test =< lib.contentElement
 tt_content.media.test {
   hallo = welt
 }

@@ -39,6 +39,7 @@
   ">"
   "<"
   ":="
+  "=<"
   (condition_bool)
 ] @operator
 

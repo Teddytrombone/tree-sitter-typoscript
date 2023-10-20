@@ -45,7 +45,7 @@ module.exports = grammar({
 
         copy_line: $ => seq($.identifier, '<', alias($.identifier, $.copy_identifier), optional($._comments), '\n'),
 
-        reference_line: $ => seq($.identifier, /=\s*</, alias($.identifier, $.reference_identifier), optional($._comments), '\n'),
+        reference_line: $ => seq($.identifier, alias(/=\s*</, "=<"), alias($.identifier, $.reference_identifier), optional($._comments), '\n'),
 
         modification_line: $ => seq($.identifier, ':=', choice($.modifier_predefined, $.modifier_function), $.modifier_parameters, optional($._comments), '\n'),
 
