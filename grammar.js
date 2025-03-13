@@ -14,6 +14,7 @@ module.exports = grammar({
         _block_item: $ => choice(
             /\n/,
             $.modification_line,
+            alias($._fake_reference_line, $.assignment_line),
             $.reference_line,
             $.assignment_line,
             $.multiline_line,
@@ -33,7 +34,9 @@ module.exports = grammar({
 
         copy_line: $ => seq($.identifier, '<', alias($.identifier, $.copy_identifier), optional($._comments), '\n'),
 
-        reference_line: $ => seq($.identifier, alias(/=\s*</, "=<"), alias($.identifier, $.reference_identifier), optional($._comments), '\n'),
+        reference_line: $ => seq($.identifier, alias(/=\s*</, "=<"), alias($.identifier, $.reference_identifier), '\n'),
+
+        _fake_reference_line: $ => seq($.identifier, alias(/=\s*</, "=<"), alias($.identifier, $.value), $.value, '\n'),
 
         modification_line: $ => seq($.identifier, ':=', choice($.modifier_predefined, $.modifier_function), $.modifier_parameters, optional($._comments), '\n'),
 
@@ -65,7 +68,7 @@ module.exports = grammar({
 
         identifier: $ => /((?:\.)|(?:[a-zA-Z0-9_\-\\]+(?:\.[a-zA-Z0-9_\-\\]*)*))/,
 
-        cobject: $ => /(?:CASE|COA|COA_INT|CONTENT|EDITPANEL|FILE|FILES|FLUIDTEMPLATE|HMENU|TMENU|IMAGE|IMG_RESOURCE|LOAD_REGISTER|RECORDS|RESTORE_REGISTER|SVG|TEMPLATE|TEXT|USER|USER_INT|PAGE|EXTBASEPLUGIN)/,
+        cobject: $ => /(?:CASE|COA|COA_INT|CONTENT|EDITPANEL|FILE|FILES|FLUIDTEMPLATE|HMENU|TMENU|IMAGE|IMG_RESOURCE|LOAD_REGISTER|RECORDS|RESTORE_REGISTER|SVG|TEMPLATE|TEXT|USER|USER_INT|PAGE|EXTBASEPLUGIN|PAGEVIEW)/,
 
         modifier_predefined: $ => /(prepend|append|remove|replace)String|(addTo|removeFrom|unique|reverse|sort)List/,
 

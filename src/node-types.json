@@ -440,19 +440,11 @@
       "required": true,
       "types": [
         {
-          "type": "comment",
-          "named": true
-        },
-        {
           "type": "identifier",
           "named": true
         },
         {
           "type": "reference_identifier",
-          "named": true
-        },
-        {
-          "type": "single_line_comment",
           "named": true
         }
       ]

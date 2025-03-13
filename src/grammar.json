@@ -33,6 +33,15 @@
           "name": "modification_line"
         },
         {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_fake_reference_line"
+          },
+          "named": true,
+          "value": "assignment_line"
+        },
+        {
           "type": "SYMBOL",
           "name": "reference_line"
         },
@@ -230,16 +239,39 @@
           "value": "reference_identifier"
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "_comments"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
+          "type": "STRING",
+          "value": "\n"
+        }
+      ]
+    },
+    "_fake_reference_line": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "PATTERN",
+            "value": "=\\s*<"
+          },
+          "named": false,
+          "value": "=<"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          },
+          "named": true,
+          "value": "value"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "value"
         },
         {
           "type": "STRING",
@@ -599,7 +631,7 @@
     },
     "cobject": {
       "type": "PATTERN",
-      "value": "(?:CASE|COA|COA_INT|CONTENT|EDITPANEL|FILE|FILES|FLUIDTEMPLATE|HMENU|TMENU|IMAGE|IMG_RESOURCE|LOAD_REGISTER|RECORDS|RESTORE_REGISTER|SVG|TEMPLATE|TEXT|USER|USER_INT|PAGE|EXTBASEPLUGIN)"
+      "value": "(?:CASE|COA|COA_INT|CONTENT|EDITPANEL|FILE|FILES|FLUIDTEMPLATE|HMENU|TMENU|IMAGE|IMG_RESOURCE|LOAD_REGISTER|RECORDS|RESTORE_REGISTER|SVG|TEMPLATE|TEXT|USER|USER_INT|PAGE|EXTBASEPLUGIN|PAGEVIEW)"
     },
     "modifier_predefined": {
       "type": "PATTERN",

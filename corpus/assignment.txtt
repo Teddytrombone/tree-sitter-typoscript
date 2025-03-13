@@ -17,6 +17,20 @@ page = PAGE
 
 
 ====
+Assignment with html code
+====
+
+foo = <ul>
+
+---
+(typoscript
+  (assignment_line
+    (identifier)
+    (value)
+    (value)))
+
+
+====
 Nested assignment
 ====
 
