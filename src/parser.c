@@ -17,7 +17,7 @@
 #define STATE_COUNT 134
 #define LARGE_STATE_COUNT 2
 #define SYMBOL_COUNT 81
-#define ALIAS_COUNT 5
+#define ALIAS_COUNT 6
 #define TOKEN_COUNT 42
 #define EXTERNAL_TOKEN_COUNT 0
 #define FIELD_COUNT 0
@@ -105,11 +105,12 @@ enum {
   aux_sym_modifier_parameter_repeat1 = 78,
   aux_sym_string_repeat1 = 79,
   aux_sym_string_repeat2 = 80,
-  anon_alias_sym_bracket_parameter = 81,
-  alias_sym_condition_attribute = 82,
-  alias_sym_copy_identifier = 83,
-  anon_alias_sym_function = 84,
-  alias_sym_reference_identifier = 85,
+  anon_alias_sym_EQ_LT = 81,
+  anon_alias_sym_bracket_parameter = 82,
+  alias_sym_condition_attribute = 83,
+  alias_sym_copy_identifier = 84,
+  anon_alias_sym_function = 85,
+  alias_sym_reference_identifier = 86,
 };
 
 static const char * const ts_symbol_names[] = {
@@ -119,7 +120,7 @@ static const char * const ts_symbol_names[] = {
   [anon_sym_LF] = "\n",
   [anon_sym_GT] = ">",
   [anon_sym_LT] = "<",
-  [aux_sym_reference_line_token1] = "=<",
+  [aux_sym_reference_line_token1] = "reference_line_token1",
   [anon_sym_COLON_EQ] = ":=",
   [anon_sym_AMP_AMP] = "&&",
   [anon_sym_PIPE_PIPE] = "||",
@@ -194,6 +195,7 @@ static const char * const ts_symbol_names[] = {
   [aux_sym_modifier_parameter_repeat1] = "modifier_parameter_repeat1",
   [aux_sym_string_repeat1] = "string_repeat1",
   [aux_sym_string_repeat2] = "string_repeat2",
+  [anon_alias_sym_EQ_LT] = "=<",
   [anon_alias_sym_bracket_parameter] = "bracket_parameter",
   [alias_sym_condition_attribute] = "condition_attribute",
   [alias_sym_copy_identifier] = "copy_identifier",
@@ -283,6 +285,7 @@ static const TSSymbol ts_symbol_map[] = {
   [aux_sym_modifier_parameter_repeat1] = aux_sym_modifier_parameter_repeat1,
   [aux_sym_string_repeat1] = aux_sym_string_repeat1,
   [aux_sym_string_repeat2] = aux_sym_string_repeat2,
+  [anon_alias_sym_EQ_LT] = anon_alias_sym_EQ_LT,
   [anon_alias_sym_bracket_parameter] = anon_alias_sym_bracket_parameter,
   [alias_sym_condition_attribute] = alias_sym_condition_attribute,
   [alias_sym_copy_identifier] = alias_sym_copy_identifier,
@@ -316,7 +319,7 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .named = false,
   },
   [aux_sym_reference_line_token1] = {
-    .visible = true,
+    .visible = false,
     .named = false,
   },
   [anon_sym_COLON_EQ] = {
@@ -615,6 +618,10 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .visible = false,
     .named = false,
   },
+  [anon_alias_sym_EQ_LT] = {
+    .visible = true,
+    .named = false,
+  },
   [anon_alias_sym_bracket_parameter] = {
     .visible = true,
     .named = false,
@@ -649,6 +656,7 @@ static const TSSymbol ts_alias_sequences[PRODUCTION_ID_COUNT][MAX_ALIAS_SEQUENCE
     [2] = alias_sym_copy_identifier,
   },
   [4] = {
+    [1] = anon_alias_sym_EQ_LT,
     [2] = alias_sym_reference_identifier,
   },
   [5] = {
@@ -656,6 +664,7 @@ static const TSSymbol ts_alias_sequences[PRODUCTION_ID_COUNT][MAX_ALIAS_SEQUENCE
   },
   [6] = {
     [2] = sym_value,
+    [3] = sym_value,
   },
   [7] = {
     [0] = anon_alias_sym_function,
@@ -669,6 +678,9 @@ static const uint16_t ts_non_terminal_alias_map[] = {
   sym_condition, 2,
     sym_condition,
     anon_alias_sym_bracket_parameter,
+  sym_value, 2,
+    sym_value,
+    sym_value,
   sym_modifier_parameters, 2,
     sym_modifier_parameters,
     anon_alias_sym_function,

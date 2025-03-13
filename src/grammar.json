@@ -252,26 +252,26 @@
           "name": "identifier"
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "PATTERN",
-            "value": "=\\s*<"
-          },
-          "named": false,
-          "value": "=<"
+          "type": "PATTERN",
+          "value": "=\\s*<"
         },
         {
           "type": "ALIAS",
           "content": {
-            "type": "SYMBOL",
-            "name": "identifier"
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "identifier"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "value"
+              }
+            ]
           },
           "named": true,
           "value": "value"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "value"
         },
         {
           "type": "STRING",

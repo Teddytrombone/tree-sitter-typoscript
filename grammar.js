@@ -36,7 +36,7 @@ module.exports = grammar({
 
         reference_line: $ => seq($.identifier, alias(/=\s*</, "=<"), alias($.identifier, $.reference_identifier), '\n'),
 
-        _fake_reference_line: $ => seq($.identifier, alias(/=\s*</, "=<"), alias($.identifier, $.value), $.value, '\n'),
+        _fake_reference_line: $ => seq($.identifier, /=\s*</, alias(seq($.identifier, $.value), $.value), '\n'),
 
         modification_line: $ => seq($.identifier, ':=', choice($.modifier_predefined, $.modifier_function), $.modifier_parameters, optional($._comments), '\n'),
 
