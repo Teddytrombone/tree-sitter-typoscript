@@ -1,0 +1,784 @@
+====
+Application Context
+====
+
+[applicationContext == "Development"]
+[applicationContext == "Production/Staging"]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_built_in_variable))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_literal
+              (symfony_string)))))))
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_built_in_variable))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_literal
+              (symfony_string))))))))
+
+====
+Language Selection
+====
+ 
+[siteLanguage("locale") == "en_US.UTF-8"]
+[siteLanguage("title") == "English"]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_function_call
+              (symfony_predefined_function)
+              (symfony_function_parameter
+                (symfony_literal
+                  (symfony_string)))))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_literal
+              (symfony_string)))))))
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_function_call
+              (symfony_predefined_function)
+              (symfony_function_parameter
+                (symfony_literal
+                  (symfony_string)))))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_literal
+              (symfony_string))))))))
+
+====
+With Get Parameter: e.g., &print=1
+====
+
+[request.getQueryParams() ['print'] > 0]
+[traverse(request.getQueryParams(), 'tx_news_pi1/news') > 0]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_array_access
+              (symfony_expression
+                (symfony_method_call
+                  (symfony_built_in_variable)
+                  (symfony_method)))
+              (symfony_expression
+                (symfony_literal
+                  (symfony_string)))))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_literal
+              (symfony_number)))))))
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_function_call
+              (symfony_predefined_function)
+              (symfony_function_parameter
+                (symfony_method_call
+                  (symfony_built_in_variable)
+                  (symfony_method)))
+              (symfony_function_parameter
+                (symfony_literal
+                  (symfony_string)))))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_literal
+              (symfony_number))))))))
+
+====
+Single Page WITHOUT Subpages
+====
+
+[traverse(page, "uid") == 17]
+[traverse(page, "uid") in [17,24]]
+[getTSFE().id == 17]
+[getTSFE().id in [17,24]]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_function_call
+              (symfony_predefined_function)
+              (symfony_function_parameter
+                (symfony_built_in_variable))
+              (symfony_function_parameter
+                (symfony_literal
+                  (symfony_string)))))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_literal
+              (symfony_number)))))))
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_function_call
+              (symfony_predefined_function)
+              (symfony_function_parameter
+                (symfony_built_in_variable))
+              (symfony_function_parameter
+                (symfony_literal
+                  (symfony_string)))))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_literal
+              (symfony_array
+                (symfony_expression
+                  (symfony_literal
+                    (symfony_number)))
+                (symfony_expression
+                  (symfony_literal
+                    (symfony_number))))))))))
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_property_access
+              (symfony_function_call
+                (symfony_predefined_function))
+              (symfony_property)))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_literal
+              (symfony_number)))))))
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_property_access
+              (symfony_function_call
+                (symfony_predefined_function))
+              (symfony_property)))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_literal
+              (symfony_array
+                (symfony_expression
+                  (symfony_literal
+                    (symfony_number)))
+                (symfony_expression
+                  (symfony_literal
+                    (symfony_number)))))))))))
+
+====
+Page ID AND its Subpages
+====
+
+[17 in tree.rootLineIds || 24 in tree.rootLineIds]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_binary_expression
+              (symfony_expression
+                (symfony_literal
+                  (symfony_number)))
+              (symfony_condition_operator)
+              (symfony_expression
+                (symfony_property_access
+                  (symfony_built_in_variable)
+                  (symfony_property)))))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_binary_expression
+              (symfony_expression
+                (symfony_literal
+                  (symfony_number)))
+              (symfony_condition_operator)
+              (symfony_expression
+                (symfony_property_access
+                  (symfony_built_in_variable)
+                  (symfony_property))))))))))
+
+====
+ONLY Subpages of the specified Page ID, not the selected page itself
+====
+
+[17 in tree.rootLineParentIds || 24 in tree.rootLineParentIds]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_binary_expression
+              (symfony_expression
+                (symfony_literal
+                  (symfony_number)))
+              (symfony_condition_operator)
+              (symfony_expression
+                (symfony_property_access
+                  (symfony_built_in_variable)
+                  (symfony_property)))))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_binary_expression
+              (symfony_expression
+                (symfony_literal
+                  (symfony_number)))
+              (symfony_condition_operator)
+              (symfony_expression
+                (symfony_property_access
+                  (symfony_built_in_variable)
+                  (symfony_property))))))))))
+
+====
+Domain
+====
+
+[request.getNormalizedParams().getHttpHost() == 'www.example.org']
+[like(request.getNormalizedParams().getHttpHost(), '*.test')]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_method_call
+              (symfony_method_call
+                (symfony_built_in_variable)
+                (symfony_method))
+              (symfony_method)))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_literal
+              (symfony_string)))))))
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_function_call
+          (symfony_predefined_function)
+          (symfony_function_parameter
+            (symfony_method_call
+              (symfony_method_call
+                (symfony_built_in_variable)
+                (symfony_method))
+              (symfony_method)))
+          (symfony_function_parameter
+            (symfony_literal
+              (symfony_string))))))))
+
+====
+Protocol
+====
+
+[request.getNormalizedParams().isHttps() == false]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_method_call
+              (symfony_method_call
+                (symfony_built_in_variable)
+                (symfony_method))
+              (symfony_method)))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_literal
+              (symfony_boolean))))))))
+
+====
+Query Page Properties (FE only)
+====
+ 
+[traverse(page, "backend_layout") == 'pagets__2_columns_33_66']
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_function_call
+              (symfony_predefined_function)
+              (symfony_function_parameter
+                (symfony_built_in_variable))
+              (symfony_function_parameter
+                (symfony_literal
+                  (symfony_string)))))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_literal
+              (symfony_string))))))))
+
+====
+Query Page Properties (FE and BE)
+====
+
+[tree.pagelayout == 1]
+[tree.pagelayout == "pagets__1Column"]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_property_access
+              (symfony_built_in_variable)
+              (symfony_property)))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_literal
+              (symfony_number)))))))
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_property_access
+              (symfony_built_in_variable)
+              (symfony_property)))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_literal
+              (symfony_string))))))))
+
+====
+User Groups
+====
+
+[usergroup("1,2")]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_function_call
+          (symfony_predefined_function)
+          (symfony_function_parameter
+            (symfony_literal
+              (symfony_string))))))))
+
+====
+Frontend User
+====
+
+// Logged in as any frontend user:
+[loginUser('*')]
+[frontend.user.isLoggedIn == 1]
+ 
+// Logged in as a specific frontend user:
+[frontend.user.userId == 2]
+ 
+// Logged in as one of the listed frontend users:
+[loginUser('1,2')]
+[frontend.user.userId in [1,2]]
+ 
+// Currently not logged in on the frontend:
+[loginUser('*') == false]
+
+---
+
+(typoscript
+  (single_line_comment)
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_function_call
+          (symfony_predefined_function)
+          (symfony_function_parameter
+            (symfony_literal
+              (symfony_string)))))))
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_property_access
+              (symfony_property_access
+                (symfony_built_in_variable)
+                (symfony_property))
+              (symfony_property)))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_literal
+              (symfony_number))))))
+    (single_line_comment))
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_property_access
+              (symfony_property_access
+                (symfony_built_in_variable)
+                (symfony_property))
+              (symfony_property)))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_literal
+              (symfony_number))))))
+    (single_line_comment))
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_function_call
+          (symfony_predefined_function)
+          (symfony_function_parameter
+            (symfony_literal
+              (symfony_string)))))))
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_property_access
+              (symfony_property_access
+                (symfony_built_in_variable)
+                (symfony_property))
+              (symfony_property)))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_literal
+              (symfony_array
+                (symfony_expression
+                  (symfony_literal
+                    (symfony_number)))
+                (symfony_expression
+                  (symfony_literal
+                    (symfony_number)))))))))
+    (single_line_comment))
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_function_call
+              (symfony_predefined_function)
+              (symfony_function_parameter
+                (symfony_literal
+                  (symfony_string)))))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_literal
+              (symfony_boolean))))))))
+
+====
+Frontend User Logged in to Backend?
+====
+
+[getTSFE().isBackendUserLoggedIn()]
+
+[backend.user.isLoggedIn]
+[backend.user.isAdmin]
+[backend.user.userId == 2]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_method_call
+          (symfony_function_call
+            (symfony_predefined_function))
+          (symfony_method)))))
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_property_access
+          (symfony_property_access
+            (symfony_built_in_variable)
+            (symfony_property))
+          (symfony_property)))))
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_property_access
+          (symfony_property_access
+            (symfony_built_in_variable)
+            (symfony_property))
+          (symfony_property)))))
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_property_access
+              (symfony_property_access
+                (symfony_built_in_variable)
+                (symfony_property))
+              (symfony_property)))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_literal
+              (symfony_number))))))))
+
+====
+Read Constant greater than 10
+====
+
+[{$constant} > 10]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_literal
+              (constant)))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_literal
+              (symfony_number))))))))
+
+====
+Read Values from Site Configuration
+====
+
+[site("identifier") == "mysite"]
+[site("base") == "http://local.test/"]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_function_call
+              (symfony_predefined_function)
+              (symfony_function_parameter
+                (symfony_literal
+                  (symfony_string)))))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_literal
+              (symfony_string)))))))
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_function_call
+              (symfony_predefined_function)
+              (symfony_function_parameter
+                (symfony_literal
+                  (symfony_string)))))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_literal
+              (symfony_string))))))))
+
+====
+Conditions [global] and [else]
+====
+[Condition]
+page.10.value = Internet Explorer
+[ELSE]
+page.10.value = No Internet Explorer!
+[END]
+ 
+// negate condition
+[Condition]
+[else]
+page.10.value = foobar
+[end]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_variable)))
+    (assignment_line
+      (identifier)
+      (value)))
+  (condition_block
+    (condition_else)
+    (assignment_line
+      (identifier)
+      (value)))
+  (condition_end)
+  (single_line_comment)
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_variable))))
+  (condition_block
+    (condition_else)
+    (assignment_line
+      (identifier)
+      (value)))
+  (condition_end))
+
+====
+Conditions && and ||
+====
+
+// AND
+[Condition1 && Condition2]
+ 
+// OR
+[Condition1 || Condition2] 
+ 
+// OR mixed with AND
+[frontend.user.isLoggedIn == 1 || getTSFE().id == 75 && siteLanguage("title") == "English"]
+test = 1
+
+---
+
+(typoscript
+  (single_line_comment)
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_variable))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_variable)))))
+    (single_line_comment))
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_variable))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_variable)))))
+    (single_line_comment))
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_binary_expression
+              (symfony_expression
+                (symfony_property_access
+                  (symfony_property_access
+                    (symfony_built_in_variable)
+                    (symfony_property))
+                  (symfony_property)))
+              (symfony_condition_operator)
+              (symfony_expression
+                (symfony_literal
+                  (symfony_number)))))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_binary_expression
+              (symfony_expression
+                (symfony_binary_expression
+                  (symfony_expression
+                    (symfony_property_access
+                      (symfony_function_call
+                        (symfony_predefined_function))
+                      (symfony_property)))
+                  (symfony_condition_operator)
+                  (symfony_expression
+                    (symfony_literal
+                      (symfony_number)))))
+              (symfony_condition_operator)
+              (symfony_expression
+                (symfony_binary_expression
+                  (symfony_expression
+                    (symfony_function_call
+                      (symfony_predefined_function)
+                      (symfony_function_parameter
+                        (symfony_literal
+                          (symfony_string)))))
+                  (symfony_condition_operator)
+                  (symfony_expression
+                    (symfony_literal
+                      (symfony_string))))))))))
+    (assignment_line
+      (identifier)
+      (value))))
+
+====
+Conditions negate
+====
+
+[!Condition1]
+
+[Condition1 && !Condition2]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_unary_expression
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_variable))))))
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_variable))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_unary_expression
+              (symfony_condition_operator)
+              (symfony_expression
+                (symfony_variable)))))))))

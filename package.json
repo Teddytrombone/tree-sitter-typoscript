@@ -1,27 +1,54 @@
 {
-    "name": "tree-sitter-typoscript",
-    "version": "0.0.3",
-    "description": "",
-    "main": "bindings/node",
-    "scripts": {
-        "build": "tree-sitter generate && node-gyp build"
-    },
-    "author": "Manfred Egger",
-    "license": "MIT",
-    "dependencies": {
-        "nan": "^2.18.0"
-    },
-    "devDependencies": {
-        "tree-sitter-cli": "^0.20.8"
-    },
-    "tree-sitter": [
-        {
-            "scope": "typoscript",
-            "file-types": [
-                "typoscript",
-                "tsconfig"
-            ],
-            "injection-regex": "typoscript"
-        }
-    ]
+  "name": "tree-sitter-typoscript",
+  "version": "0.1.0",
+  "description": "TypoScript grammar for tree-sitter",
+  "repository": "https://github.com/teddytrombone/tree-sitter-typoscript",
+  "license": "MIT",
+  "author": {
+    "name": "Manfred Egger"
+  },
+  "main": "bindings/node",
+  "types": "bindings/node",
+  "keywords": [
+    "incremental",
+    "parsing",
+    "tree-sitter",
+    "typoscript"
+  ],
+  "files": [
+    "grammar.js",
+    "tree-sitter.json",
+    "binding.gyp",
+    "prebuilds/**",
+    "bindings/node/*",
+    "queries/*",
+    "src/**",
+    "*.wasm"
+  ],
+  "dependencies": {
+    "node-addon-api": "^8.5.0",
+    "node-gyp-build": "^4.8.2"
+  },
+  "devDependencies": {
+    "eslint": "9.35.0",
+    "eslint-config-treesitter": "^1.0.2",
+    "prebuildify": "^6.0.1",
+    "tree-sitter-cli": "^0.25.10"
+  },
+  "peerDependencies": {
+    "tree-sitter": "^0.25.0"
+  },
+  "peerDependenciesMeta": {
+    "tree-sitter": {
+      "optional": true
+    }
+  },
+  "scripts": {
+    "build": "tree-sitter generate && node-gyp build",
+    "install": "node-gyp-build",
+    "lint": "eslint grammar.js grammar/*.js",
+    "prestart": "tree-sitter build --wasm",
+    "start": "tree-sitter playground",
+    "test": "node --test bindings/node/*_test.js"
+  }
 }

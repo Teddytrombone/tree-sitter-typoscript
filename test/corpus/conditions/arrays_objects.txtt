@@ -1,0 +1,141 @@
+====================
+Arrays and Objects
+====================
+
+[[1, 2, 3]]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_literal
+          (symfony_array
+            (symfony_expression
+              (symfony_literal
+                (symfony_number)))
+            (symfony_expression
+              (symfony_literal
+                (symfony_number)))
+            (symfony_expression
+              (symfony_literal
+                (symfony_number)))))))))
+
+====================
+String Array
+====================
+
+[["a", "b", "c"]]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_literal
+          (symfony_array
+            (symfony_expression
+              (symfony_literal
+                (symfony_string)))
+            (symfony_expression
+              (symfony_literal
+                (symfony_string)))
+            (symfony_expression
+              (symfony_literal
+                (symfony_string)))))))))
+
+====================
+Mixed Array
+====================
+
+[[1, "mixed", true]]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_literal
+          (symfony_array
+            (symfony_expression
+              (symfony_literal
+                (symfony_number)))
+            (symfony_expression
+              (symfony_literal
+                (symfony_string)))
+            (symfony_expression
+              (symfony_literal
+                (symfony_boolean)))))))))
+
+====================
+Simple Object
+====================
+
+[{"key": "value"}]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_literal
+          (symfony_object
+            (symfony_pair
+              (symfony_string)
+              (symfony_expression
+                (symfony_literal
+                  (symfony_string))))))))))
+
+====================
+Complex Object
+====================
+
+[{"name": "John", "age": 30}]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_literal
+          (symfony_object
+            (symfony_pair
+              (symfony_string)
+              (symfony_expression
+                (symfony_literal
+                  (symfony_string))))
+            (symfony_pair
+              (symfony_string)
+              (symfony_expression
+                (symfony_literal
+                  (symfony_number))))))))))
+
+====================
+Nested Object
+====================
+
+[{"nested": {"inner": "value"}}]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_literal
+          (symfony_object
+            (symfony_pair
+              (symfony_string)
+              (symfony_expression
+                (symfony_literal
+                  (symfony_object
+                    (symfony_pair
+                      (symfony_string)
+                      (symfony_expression
+                        (symfony_literal
+                          (symfony_string))))))))))))))

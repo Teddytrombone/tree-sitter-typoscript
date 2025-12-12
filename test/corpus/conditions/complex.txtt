@@ -1,0 +1,210 @@
+====================
+Complex Expressions
+====================
+
+[(a + b) * c]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_parenthesized_expression
+              (symfony_expression
+                (symfony_binary_expression
+                  (symfony_expression
+                    (symfony_variable))
+                  (symfony_condition_operator)
+                  (symfony_expression
+                    (symfony_variable))))))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_variable)))))))
+
+====================
+Complex Logical Expression
+====================
+
+[user.age >= 18 and user.isActive]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_binary_expression
+              (symfony_expression
+                (symfony_property_access
+                  (symfony_variable)
+                  (symfony_property)))
+              (symfony_condition_operator)
+              (symfony_expression
+                (symfony_literal
+                  (symfony_number)))))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_property_access
+              (symfony_variable)
+              (symfony_property))))))))
+
+====================
+Chained Array and Property Access
+====================
+
+[items[0].name]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_property_access
+          (symfony_array_access
+            (symfony_expression
+              (symfony_variable))
+            (symfony_expression
+              (symfony_literal
+                (symfony_number))))
+          (symfony_property))))))
+
+====================
+Complex Ternary
+====================
+
+[condition ? trueValue : falseValue]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_ternary_expression
+          (symfony_expression
+            (symfony_variable))
+          (symfony_ternary_operator)
+          (symfony_expression
+            (symfony_variable))
+          (symfony_ternary_operator)
+          (symfony_expression
+            (symfony_variable)))))))
+
+====================
+Complex Unary with Logical
+====================
+
+[not (a or b) and c]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_unary_expression
+              (symfony_condition_operator)
+              (symfony_expression
+                (symfony_parenthesized_expression
+                  (symfony_expression
+                    (symfony_binary_expression
+                      (symfony_expression
+                        (symfony_variable))
+                      (symfony_condition_operator)
+                      (symfony_expression
+                        (symfony_variable))))))))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_variable)))))))
+
+====================
+Function with Property Argument
+====================
+
+[func(arg1, arg2.property)]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_function_call
+          (symfony_function)
+          (symfony_function_parameter
+            (symfony_variable))
+          (symfony_function_parameter
+            (symfony_property_access
+              (symfony_variable)
+              (symfony_property))))))))
+
+====================
+Method Call Chain
+====================
+
+[object.method().property]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_property_access
+          (symfony_method_call
+            (symfony_variable)
+            (symfony_method))
+          (symfony_property))))))
+
+====================
+Array Access with Method Call
+====================
+
+[array[index].method(arg)]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_method_call
+          (symfony_array_access
+            (symfony_expression
+              (symfony_variable))
+            (symfony_expression
+              (symfony_variable)))
+          (symfony_method)
+          (symfony_method_parameter
+            (symfony_variable)))))))
+
+====================
+Complex Nested Access
+====================
+
+[data["key"].nested.property]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_property_access
+          (symfony_property_access
+            (symfony_array_access
+              (symfony_expression
+                (symfony_variable))
+              (symfony_expression
+                (symfony_literal
+                  (symfony_string))))
+            (symfony_property))
+          (symfony_property))))))

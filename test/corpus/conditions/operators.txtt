@@ -1,0 +1,504 @@
+====================
+Basic Arithmetic
+====================
+
+[1 + 2]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_literal
+              (symfony_number)))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_literal
+              (symfony_number))))))))
+
+====================
+Power Operator
+====================
+
+[2 ** 3]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_literal
+              (symfony_number)))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_literal
+              (symfony_number))))))))
+
+====================
+Bitwise AND
+====================
+
+[5 & 3]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_literal
+              (symfony_number)))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_literal
+              (symfony_number))))))))
+
+====================
+Bitwise NOT
+====================
+
+[~5]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_math_unary_expression
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_literal
+              (symfony_number))))))))
+
+====================
+Comparison
+====================
+
+[a == b]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_variable))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_variable)))))))
+
+====================
+String Concatenation
+====================
+
+["hello" ~ "world"]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_literal
+              (symfony_string)))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_literal
+              (symfony_string))))))))
+
+====================
+Array In
+====================
+
+[x in [1, 2, 3]]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_variable))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_literal
+              (symfony_array
+                (symfony_expression
+                  (symfony_literal
+                    (symfony_number)))
+                (symfony_expression
+                  (symfony_literal
+                    (symfony_number)))
+                (symfony_expression
+                  (symfony_literal
+                    (symfony_number)))))))))))
+
+====================
+Range
+====================
+
+[1..5]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_literal
+              (symfony_number)))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_literal
+              (symfony_number))))))))
+
+====================
+Null Coalescing
+====================
+
+[foo ?? bar]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_null_coalescing
+          (symfony_expression
+            (symfony_variable))
+          (symfony_expression
+            (symfony_variable)))))))
+
+====================
+Null Safe Property
+====================
+
+[user?.name]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_property_access
+          (symfony_variable)
+          (symfony_property))))))
+
+====================
+Ternary
+====================
+
+[a ? b : c]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_ternary_expression
+          (symfony_expression
+            (symfony_variable))
+          (symfony_ternary_operator)
+          (symfony_expression
+            (symfony_variable))
+          (symfony_ternary_operator)
+          (symfony_expression
+            (symfony_variable)))))))
+
+====================
+Logical AND
+====================
+
+[a and b]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_variable))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_variable)))))))
+
+====================
+Parentheses
+====================
+
+[(1 + 2) * 3]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_parenthesized_expression
+              (symfony_expression
+                (symfony_binary_expression
+                  (symfony_expression
+                    (symfony_literal
+                      (symfony_number)))
+                  (symfony_condition_operator)
+                  (symfony_expression
+                    (symfony_literal
+                      (symfony_number)))))))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_literal
+              (symfony_number))))))))
+
+====================
+String Contains
+====================
+
+["hello" contains "ell"]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_literal
+              (symfony_string)))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_literal
+              (symfony_string))))))))
+
+====================
+String Starts With
+====================
+
+["hello" starts with "he"]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_literal
+              (symfony_string)))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_literal
+              (symfony_string))))))))
+
+====================
+String Ends With
+====================
+
+["hello" ends with "lo"]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_literal
+              (symfony_string)))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_literal
+              (symfony_string))))))))
+
+====================
+String Matches
+====================
+
+["hello" matches "/h.*o/"]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_literal
+              (symfony_string)))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_literal
+              (symfony_string))))))))
+
+====================
+Array Not In
+====================
+
+["x" not in [1, 2, 3]]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_literal
+              (symfony_string)))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_literal
+              (symfony_array
+                (symfony_expression
+                  (symfony_literal
+                    (symfony_number)))
+                (symfony_expression
+                  (symfony_literal
+                    (symfony_number)))
+                (symfony_expression
+                  (symfony_literal
+                    (symfony_number)))))))))))
+
+====================
+Bitwise Left Shift
+====================
+
+[1 << 2]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_literal
+              (symfony_number)))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_literal
+              (symfony_number))))))))
+
+====================
+Bitwise Right Shift
+====================
+
+[8 >> 2]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_literal
+              (symfony_number)))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_literal
+              (symfony_number))))))))
+
+====================
+Bitwise XOR
+====================
+
+[5 ^ 3]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_literal
+              (symfony_number)))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_literal
+              (symfony_number))))))))
+
+====================
+Bitwise OR
+====================
+
+[5 | 3]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_literal
+              (symfony_number)))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_literal
+              (symfony_number))))))))
+
+====================
+Complex Ternary
+====================
+
+[a ? (b ? c : d) : e]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_ternary_expression
+          (symfony_expression
+            (symfony_variable))
+          (symfony_ternary_operator)
+          (symfony_expression
+            (symfony_parenthesized_expression
+              (symfony_expression
+                (symfony_ternary_expression
+                  (symfony_expression
+                    (symfony_variable))
+                  (symfony_ternary_operator)
+                  (symfony_expression
+                    (symfony_variable))
+                  (symfony_ternary_operator)
+                  (symfony_expression
+                    (symfony_variable))))))
+          (symfony_ternary_operator)
+          (symfony_expression
+            (symfony_variable)))))))

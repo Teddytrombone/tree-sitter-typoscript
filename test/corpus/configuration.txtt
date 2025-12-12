@@ -5,12 +5,11 @@ Reference assignment
 foo =< bar
 
 ---
+
 (typoscript
   (reference_line
     (identifier)
     (reference_identifier)))
-
-
 
 ====
 Reference assignment with whitespace
@@ -19,12 +18,11 @@ Reference assignment with whitespace
 foo = < bar
 
 ---
+
 (typoscript
   (reference_line
     (identifier)
     (reference_identifier)))
-
-
 
 ====
 Copy
@@ -33,11 +31,11 @@ Copy
 foo < bar
 
 ---
+
 (typoscript
   (copy_line
     (identifier)
-    (copy_identifier)
-    ))
+    (copy_identifier)))
 
 ====
 Copy with comment
@@ -46,13 +44,54 @@ Copy with comment
 foo < bar # Something
 
 ---
+
 (typoscript
   (copy_line
     (identifier)
     (copy_identifier)
-    (single_line_comment)
-    ))
+    (single_line_comment)))
 
+====
+Copy nested
+====
+
+myIdentifier {
+   20 < myIdentifier.10
+}
+
+---
+
+(typoscript
+  (configuration_block
+    (identifier)
+    (block
+      (block_punctuation)
+      (block_inner_content
+        (copy_line
+          (identifier)
+          (copy_identifier)))
+      (block_punctuation))))
+
+====
+Copy nested relative
+====
+
+myIdentifier {
+   20 < .10
+}
+
+---
+
+(typoscript
+  (configuration_block
+    (identifier)
+    (block
+      (block_punctuation)
+      (block_inner_content
+        (copy_line
+          (identifier)
+          (copy_identifier)))
+      (block_punctuation))))
 
 ====
 Deletion
@@ -61,11 +100,10 @@ Deletion
 foo >
 
 ---
+
 (typoscript
   (deletion_line
-    (identifier)
-    ))
-
+    (identifier)))
 
 ====
 Deletion with comment
@@ -74,11 +112,11 @@ Deletion with comment
 foo > # Something
 
 ---
+
 (typoscript
   (deletion_line
     (identifier)
     (single_line_comment)))
-
 
 ====
 Modification
@@ -87,6 +125,7 @@ Modification
 foo:=addToList(123)
 
 ---
+
 (typoscript
   (modification_line
     (identifier)
@@ -101,14 +140,14 @@ Modification with comment
 foo := addToList(123) # Something
 
 ---
+
 (typoscript
   (modification_line
     (identifier)
     (modifier_predefined)
     (modifier_parameters
       (modifier_parameter))
-  (single_line_comment)))
-
+    (single_line_comment)))
 
 ====
 Modification with brace and user defined function
@@ -117,10 +156,10 @@ Modification with brace and user defined function
 foo := addToListTest(x-inf())
 
 ---
+
 (typoscript
   (modification_line
     (identifier)
     (modifier_function)
     (modifier_parameters
       (modifier_parameter))))
-  

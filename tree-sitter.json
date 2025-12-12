@@ -1,0 +1,42 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "typoscript",
+      "camelcase": "TypoScript",
+      "title": "TypoScript",
+      "scope": "source.typoscript",
+      "file-types": [
+        "typoscript",
+        "tsconfig"
+      ],
+      "injection-regex": "^typoscript$",
+      "class-name": "TreeSitterTyposcript",
+      "highlights": [
+        "queries/highlights.scm"
+      ]
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "MIT",
+    "description": "TypoScript grammar for tree-sitter",
+    "authors": [
+      {
+        "name": "Manfred Egger"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/Teddytrombone/tree-sitter-typoscript"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true,
+    "zig": false
+  }
+}

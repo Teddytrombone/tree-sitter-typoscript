@@ -1,4 +1,3 @@
-
 ====
 Include old syntax
 ====
@@ -6,10 +5,11 @@ Include old syntax
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:foo/Configuration/TypoScript/setup.typoscript">
 
 ---
+
 (typoscript
   (import_legacy
+    (condition_attribute)
     (string)))
-
 
 ====
 Include old syntax, no space
@@ -18,11 +18,11 @@ Include old syntax, no space
 <INCLUDE_TYPOSCRIPT:source="FILE:EXT:foo/Configuration/TypoScript/setup.typoscript">
 
 ---
+
 (typoscript
   (import_legacy
+    (condition_attribute)
     (string)))
-
-
 
 ====
 Include old syntax with extensions
@@ -31,12 +31,13 @@ Include old syntax with extensions
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:foo/Configuration/TypoScript/setup.typoscript" extensions="typoscript">
 
 ---
+
 (typoscript
   (import_legacy
+    (condition_attribute)
     (string)
     (condition_attribute)
     (string)))
-
 
 ====
 Include old syntax with condition
@@ -45,13 +46,13 @@ Include old syntax with condition
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:foo/Configuration/TypoScript/setup.typoscript" condition="YourVendor\YourPackage\YourCondition">
 
 ---
+
 (typoscript
   (import_legacy
+    (condition_attribute)
     (string)
     (condition_attribute)
     (string)))
-
-
 
 ====
 Import new syntax single quotes
@@ -60,10 +61,10 @@ Import new syntax single quotes
 @import 'EXT:foo/Configuration/TypoScript/setup.typoscript'
 
 ---
+
 (typoscript
   (import
     (string)))
-
 
 ====
 Import new syntax double quotes
@@ -72,7 +73,23 @@ Import new syntax double quotes
 @import "EXT:foo/Configuration/TypoScript/setup.typoscript"
 
 ---
+
 (typoscript
   (import
     (string)))
 
+====
+Import new syntax wildcard
+====
+
+@import "EXT:foo/Configuration/TypoScript/*.typoscript"
+test = */
+
+---
+
+(typoscript
+  (import
+    (string))
+  (assignment_line
+    (identifier)
+    (value)))

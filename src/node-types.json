@@ -31,11 +31,26 @@
       "required": true,
       "types": [
         {
-          "type": "assignment_line",
+          "type": "block_inner_content",
           "named": true
         },
         {
           "type": "block_punctuation",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "block_inner_content",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "assignment_line",
           "named": true
         },
         {
@@ -82,38 +97,19 @@
     }
   },
   {
-    "type": "bracket_parameter",
-    "named": false,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "condition_bool",
-          "named": true
-        },
-        {
-          "type": "constant",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "condition",
     "named": true,
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
-          "type": "condition_bool",
+          "type": "symfony_comment",
           "named": true
         },
         {
-          "type": "constant",
+          "type": "symfony_expression",
           "named": true
         }
       ]
@@ -140,7 +136,7 @@
           "named": true
         },
         {
-          "type": "condition_bool",
+          "type": "condition_bool_legacy",
           "named": true
         },
         {
@@ -187,12 +183,7 @@
     }
   },
   {
-    "type": "condition_bool",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "condition_else",
+    "type": "condition_bool_legacy",
     "named": true,
     "fields": {}
   },
@@ -222,6 +213,26 @@
   },
   {
     "type": "constant",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "constant_null_coalescing",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "constant_null_coalescing",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "copy_identifier",
     "named": true,
     "fields": {}
   },
@@ -421,6 +432,21 @@
     "named": true,
     "fields": {},
     "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "multiline_value_content",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "multiline_value_content",
+    "named": true,
+    "fields": {},
+    "children": {
       "multiple": true,
       "required": false,
       "types": [
@@ -466,8 +492,571 @@
     }
   },
   {
+    "type": "symfony_array",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "symfony_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "symfony_array_access",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "symfony_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "symfony_binary_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "symfony_condition_operator",
+          "named": true
+        },
+        {
+          "type": "symfony_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "symfony_boolean",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "symfony_built_in_variable",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "symfony_condition_operator",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "symfony_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "symfony_array_access",
+          "named": true
+        },
+        {
+          "type": "symfony_binary_expression",
+          "named": true
+        },
+        {
+          "type": "symfony_built_in_variable",
+          "named": true
+        },
+        {
+          "type": "symfony_function_call",
+          "named": true
+        },
+        {
+          "type": "symfony_literal",
+          "named": true
+        },
+        {
+          "type": "symfony_math_unary_expression",
+          "named": true
+        },
+        {
+          "type": "symfony_method_call",
+          "named": true
+        },
+        {
+          "type": "symfony_null_coalescing",
+          "named": true
+        },
+        {
+          "type": "symfony_parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "symfony_property_access",
+          "named": true
+        },
+        {
+          "type": "symfony_ternary_expression",
+          "named": true
+        },
+        {
+          "type": "symfony_unary_expression",
+          "named": true
+        },
+        {
+          "type": "symfony_variable",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "symfony_function_call",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "symfony_function",
+          "named": true
+        },
+        {
+          "type": "symfony_function_parameter",
+          "named": true
+        },
+        {
+          "type": "symfony_predefined_function",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "symfony_function_parameter",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "symfony_array_access",
+          "named": true
+        },
+        {
+          "type": "symfony_binary_expression",
+          "named": true
+        },
+        {
+          "type": "symfony_built_in_variable",
+          "named": true
+        },
+        {
+          "type": "symfony_function_call",
+          "named": true
+        },
+        {
+          "type": "symfony_literal",
+          "named": true
+        },
+        {
+          "type": "symfony_math_unary_expression",
+          "named": true
+        },
+        {
+          "type": "symfony_method_call",
+          "named": true
+        },
+        {
+          "type": "symfony_null_coalescing",
+          "named": true
+        },
+        {
+          "type": "symfony_parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "symfony_property_access",
+          "named": true
+        },
+        {
+          "type": "symfony_ternary_expression",
+          "named": true
+        },
+        {
+          "type": "symfony_unary_expression",
+          "named": true
+        },
+        {
+          "type": "symfony_variable",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "symfony_literal",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "constant",
+          "named": true
+        },
+        {
+          "type": "symfony_array",
+          "named": true
+        },
+        {
+          "type": "symfony_boolean",
+          "named": true
+        },
+        {
+          "type": "symfony_null",
+          "named": true
+        },
+        {
+          "type": "symfony_number",
+          "named": true
+        },
+        {
+          "type": "symfony_object",
+          "named": true
+        },
+        {
+          "type": "symfony_string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "symfony_math_unary_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "symfony_condition_operator",
+          "named": true
+        },
+        {
+          "type": "symfony_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "symfony_method_call",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "symfony_array_access",
+          "named": true
+        },
+        {
+          "type": "symfony_built_in_variable",
+          "named": true
+        },
+        {
+          "type": "symfony_comment",
+          "named": true
+        },
+        {
+          "type": "symfony_function_call",
+          "named": true
+        },
+        {
+          "type": "symfony_method",
+          "named": true
+        },
+        {
+          "type": "symfony_method_call",
+          "named": true
+        },
+        {
+          "type": "symfony_method_parameter",
+          "named": true
+        },
+        {
+          "type": "symfony_parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "symfony_property_access",
+          "named": true
+        },
+        {
+          "type": "symfony_variable",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "symfony_method_parameter",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "symfony_array_access",
+          "named": true
+        },
+        {
+          "type": "symfony_binary_expression",
+          "named": true
+        },
+        {
+          "type": "symfony_built_in_variable",
+          "named": true
+        },
+        {
+          "type": "symfony_function_call",
+          "named": true
+        },
+        {
+          "type": "symfony_literal",
+          "named": true
+        },
+        {
+          "type": "symfony_math_unary_expression",
+          "named": true
+        },
+        {
+          "type": "symfony_method_call",
+          "named": true
+        },
+        {
+          "type": "symfony_null_coalescing",
+          "named": true
+        },
+        {
+          "type": "symfony_parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "symfony_property_access",
+          "named": true
+        },
+        {
+          "type": "symfony_ternary_expression",
+          "named": true
+        },
+        {
+          "type": "symfony_unary_expression",
+          "named": true
+        },
+        {
+          "type": "symfony_variable",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "symfony_null_coalescing",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "symfony_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "symfony_object",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "symfony_pair",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "symfony_pair",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "symfony_built_in_variable",
+          "named": true
+        },
+        {
+          "type": "symfony_expression",
+          "named": true
+        },
+        {
+          "type": "symfony_string",
+          "named": true
+        },
+        {
+          "type": "symfony_variable",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "symfony_parenthesized_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "symfony_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "symfony_predefined_function",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "symfony_property_access",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "symfony_array_access",
+          "named": true
+        },
+        {
+          "type": "symfony_built_in_variable",
+          "named": true
+        },
+        {
+          "type": "symfony_comment",
+          "named": true
+        },
+        {
+          "type": "symfony_function_call",
+          "named": true
+        },
+        {
+          "type": "symfony_method_call",
+          "named": true
+        },
+        {
+          "type": "symfony_parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "symfony_property",
+          "named": true
+        },
+        {
+          "type": "symfony_property_access",
+          "named": true
+        },
+        {
+          "type": "symfony_variable",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "symfony_string",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "constant",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "symfony_ternary_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "symfony_expression",
+          "named": true
+        },
+        {
+          "type": "symfony_ternary_operator",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "symfony_unary_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "symfony_condition_operator",
+          "named": true
+        },
+        {
+          "type": "symfony_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "typoscript",
     "named": true,
+    "root": true,
     "fields": {},
     "children": {
       "multiple": true,
@@ -548,6 +1137,14 @@
     "named": false
   },
   {
+    "type": "!=",
+    "named": false
+  },
+  {
+    "type": "!==",
+    "named": false
+  },
+  {
     "type": "\"",
     "named": false
   },
@@ -572,6 +1169,10 @@
     "named": false
   },
   {
+    "type": ".",
+    "named": false
+  },
+  {
     "type": ":",
     "named": false
   },
@@ -584,6 +1185,10 @@
     "named": false
   },
   {
+    "type": "<=",
+    "named": false
+  },
+  {
     "type": "=",
     "named": false
   },
@@ -592,7 +1197,27 @@
     "named": false
   },
   {
+    "type": "==",
+    "named": false
+  },
+  {
+    "type": "===",
+    "named": false
+  },
+  {
     "type": ">",
+    "named": false
+  },
+  {
+    "type": ">=",
+    "named": false
+  },
+  {
+    "type": "?.",
+    "named": false
+  },
+  {
+    "type": "??",
     "named": false
   },
   {
@@ -616,7 +1241,19 @@
     "named": false
   },
   {
+    "type": "\\",
+    "named": false
+  },
+  {
     "type": "]",
+    "named": false
+  },
+  {
+    "type": "applicationContext",
+    "named": false
+  },
+  {
+    "type": "backend",
     "named": false
   },
   {
@@ -632,16 +1269,100 @@
     "named": true
   },
   {
+    "type": "compatVersion",
+    "named": false
+  },
+  {
     "type": "condition_attribute",
     "named": true
   },
   {
-    "type": "copy_identifier",
+    "type": "condition_else",
     "named": true
+  },
+  {
+    "type": "constant",
+    "named": false
+  },
+  {
+    "type": "contains",
+    "named": false
+  },
+  {
+    "type": "date",
+    "named": false
+  },
+  {
+    "type": "ends with",
+    "named": false
+  },
+  {
+    "type": "enum",
+    "named": false
+  },
+  {
+    "type": "fake_comment",
+    "named": false
+  },
+  {
+    "type": "false",
+    "named": false
+  },
+  {
+    "type": "feature",
+    "named": false
+  },
+  {
+    "type": "frontend",
+    "named": false
+  },
+  {
+    "type": "getTSFE",
+    "named": false
+  },
+  {
+    "type": "getenv",
+    "named": false
+  },
+  {
+    "type": "identifier",
+    "named": false
   },
   {
     "type": "identifier",
     "named": true
+  },
+  {
+    "type": "in",
+    "named": false
+  },
+  {
+    "type": "ip",
+    "named": false
+  },
+  {
+    "type": "like",
+    "named": false
+  },
+  {
+    "type": "locale",
+    "named": false
+  },
+  {
+    "type": "loginUser",
+    "named": false
+  },
+  {
+    "type": "matches",
+    "named": false
+  },
+  {
+    "type": "max",
+    "named": false
+  },
+  {
+    "type": "min",
+    "named": false
   },
   {
     "type": "modifier_function",
@@ -652,19 +1373,99 @@
     "named": true
   },
   {
+    "type": "not in",
+    "named": false
+  },
+  {
+    "type": "page",
+    "named": false
+  },
+  {
     "type": "reference_identifier",
     "named": true
+  },
+  {
+    "type": "request",
+    "named": false
+  },
+  {
+    "type": "session",
+    "named": false
   },
   {
     "type": "single_line_comment",
     "named": true
   },
   {
-    "type": "source=",
+    "type": "site",
     "named": false
   },
   {
-    "type": "{$",
+    "type": "siteLanguage",
+    "named": false
+  },
+  {
+    "type": "starts with",
+    "named": false
+  },
+  {
+    "type": "symfony_comment",
+    "named": true
+  },
+  {
+    "type": "symfony_function",
+    "named": true
+  },
+  {
+    "type": "symfony_method",
+    "named": true
+  },
+  {
+    "type": "symfony_null",
+    "named": true
+  },
+  {
+    "type": "symfony_number",
+    "named": true
+  },
+  {
+    "type": "symfony_property",
+    "named": true
+  },
+  {
+    "type": "symfony_ternary_operator",
+    "named": true
+  },
+  {
+    "type": "symfony_variable",
+    "named": true
+  },
+  {
+    "type": "traverse",
+    "named": false
+  },
+  {
+    "type": "tree",
+    "named": false
+  },
+  {
+    "type": "true",
+    "named": false
+  },
+  {
+    "type": "typo3",
+    "named": false
+  },
+  {
+    "type": "usergroup",
+    "named": false
+  },
+  {
+    "type": "workspace",
+    "named": false
+  },
+  {
+    "type": "{",
     "named": false
   },
   {

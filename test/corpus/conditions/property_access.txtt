@@ -1,0 +1,127 @@
+====================
+Property Access
+====================
+
+[user.name]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_property_access
+          (symfony_variable)
+          (symfony_property))))))
+
+====================
+Method Call
+====================
+
+[user.getName()]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_method_call
+          (symfony_variable)
+          (symfony_method))))))
+
+====================
+Array Access
+====================
+
+[items[0]]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_array_access
+          (symfony_expression
+            (symfony_variable))
+          (symfony_expression
+            (symfony_literal
+              (symfony_number))))))))
+
+====================
+Chained Access
+====================
+
+[data.items[0]]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_array_access
+          (symfony_expression
+            (symfony_property_access
+              (symfony_variable)
+              (symfony_property)))
+          (symfony_expression
+            (symfony_literal
+              (symfony_number))))))))
+
+====================
+Nested Property Access
+====================
+
+[user.address.street]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_property_access
+          (symfony_property_access
+            (symfony_variable)
+            (symfony_property))
+          (symfony_property))))))
+
+====================
+Method on Property
+====================
+
+[user.address.getStreet()]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_method_call
+          (symfony_property_access
+            (symfony_variable)
+            (symfony_property))
+          (symfony_method))))))
+
+====================
+Predefined chained method calls
+====================
+
+[request.getRequestBody().address.getStreet()]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_method_call
+          (symfony_property_access
+            (symfony_method_call
+              (symfony_built_in_variable)
+              (symfony_method))
+            (symfony_property))
+          (symfony_method))))))

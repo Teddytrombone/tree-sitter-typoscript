@@ -1,0 +1,84 @@
+====================
+Block Comment
+====================
+
+[/* this is a comment */]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_comment))))
+
+====================
+Comment After Expression
+====================
+
+[true /* comment after expression */]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_literal
+          (symfony_boolean)))
+      (symfony_comment))))
+
+====================
+Comment Before Expression
+====================
+
+[/* comment */ true]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_comment)
+      (symfony_expression
+        (symfony_literal
+          (symfony_boolean))))))
+
+====================
+Comment Between Expressions
+====================
+
+[true /* comment */ false]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_literal
+          (symfony_boolean)))
+      (symfony_comment)
+      (symfony_expression
+        (symfony_literal
+          (symfony_boolean))))))
+
+===
+Comments anywhere
+===
+
+[user.name.test /* comment after expression */ .value]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_property_access
+          (symfony_property_access
+            (symfony_property_access
+              (symfony_variable)
+              (symfony_property))
+            (symfony_property))
+          (symfony_comment)
+          (symfony_property))))))

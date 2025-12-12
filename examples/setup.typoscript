@@ -1,3 +1,5 @@
+[["agfdagfdag", "b", "c"]]
+
 # Include setup
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:fluid_styled_content/Configuration/TypoScript/Helper/ContentElement.typoscript">
 <INCLUDE_TYPOSCRIPT: source='FILE:EXT:{$main_extension}/Configuration/TypoScript/Helper/ParseFunc.typoscript'>
@@ -53,10 +55,93 @@ page.10.1.value = Test
 page.10.1 >
 [global]
 
+# Legacy conditions
 [applicationContext matches "/^Development/"] AND [Condition]
 page.10.1 = TEXT
 page.10.1.value = Test
 
-[frontend.user.isLoggedIn == 1 || getTSFE().id == 75 && siteLanguage("title") == "English"]
+# Symfony expression based conditions
+[frontend.user.isLoggedIn == 1 || getTSFE().id == 75 && siteLanguage("title") == "English" or !request]
 page.20 = TEXT
 [GLOBAL]
+
+
+page.10 = IMAGE
+page.10 {
+    file = GIFBUILDER
+    file {
+        backColor = yellow
+        XY = 1024,199
+        format = avif
+        quality = 44
+        speed = 1
+
+        10 = IMAGE
+        10.offset = 10,10
+        10.file = 1:/my-image.jpg
+
+        # Scale background image
+        15 = SCALE
+        15 {
+            width = [10.w]
+            # Background Image is 20 pixel higher than scaled down "real" image
+            # Thus it should have "normal" height.
+            height = [20.h]+20
+        }
+    }
+}
+
+
+plugin.tx_seo {
+  view {
+    templateRootPaths {
+      0 = EXT:seo/Resources/Private/Templates/XmlSitemap
+      10 = {$plugin.tx_seo.view.templateRootPath ?? $seo.sitemap.view.templateRootPath}
+    }
+    partialRootPaths {
+      0 = EXT:seo/Resources/Private/Partials/XmlSitemap
+      10 = {$plugin.tx_seo.view.partialRootPath ?? $seo.sitemap.view.partialRootPath}
+    }
+    layoutRootPaths {
+      0 = EXT:seo/Resources/Private/Layouts/XmlSitemap
+      10 = {$plugin.tx_seo.view.layoutRootPath ?? $seo.sitemap.view.layoutRootPath}
+    }
+  }
+}
+
+[invalid! && condition || ValueWithorInside]
+
+plugin.tx_frontend._CSS_DEFAULT_STYLE (
+    .ce-align-left { text-align: left; }
+    .ce-align-center { text-align: center; }
+    .ce-align-right { text-align: right; }
+    .ce-border iframe {
+        border: {$styles.content.textmedia.borderWidth}px solid {$styles.content.textmedia.borderColor};
+        padding: {$styles.content.textmedia.borderPadding}px;
+    }
+    .ce-intext.ce-right .ce-gallery { margin-left: {$styles.content.textmedia.textMargin}px; }
+    .ce-intext.ce-left .ce-gallery { margin-right: {$styles.content.textmedia.textMargin}px; }
+)
+
+plugin.tx_frontend._CSS_DEFAULT_STYLE (
+    .ce-align-left { text-align: left; }
+    .ce-align-center { text-align: center; }
+    .ce-align-right { text-align: right; }
+    .ce-border iframe {
+        border: 2px solid red;
+        padding: 10px;
+    }
+)
+
+
+// AND
+[Condition1] && [Condition2]
+[Condition1] AND [Condition2]
+
+// OR
+[Condition1][Condition2]
+[Condition1] || [Condition2]
+[Condition1] OR [Condition2]
+
+// OR mixed with AND
+[browser = firefox] || [browser = msie] && [version => 8]

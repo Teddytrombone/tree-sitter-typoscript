@@ -1,0 +1,118 @@
+=====
+Single line comment
+=====
+
+# comment
+// comment
+/* comment */
+
+---
+
+(typoscript
+  (single_line_comment)
+  (single_line_comment)
+  (comment))
+
+=====
+Multi line comment
+=====
+
+/* comment
+over
+multiple
+lines
+*/
+
+---
+
+(typoscript
+  (comment))
+
+=====
+Comments with different operators
+=====
+foo < bar // This is a comment
+foo < bar /* This is a valid comment, too */
+
+foo > # Another valid comment
+
+foo := addToList(1) # Yes, a comment
+
+[foo == bar] # Many comment. Much wow.
+
+---
+
+(typoscript
+  (copy_line
+    (identifier)
+    (copy_identifier)
+    (single_line_comment))
+  (copy_line
+    (identifier)
+    (copy_identifier)
+    (comment))
+  (deletion_line
+    (identifier)
+    (single_line_comment))
+  (modification_line
+    (identifier)
+    (modifier_predefined)
+    (modifier_parameters
+      (modifier_parameter))
+    (single_line_comment))
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_variable))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_variable)))))
+    (single_line_comment)))
+
+=====
+Comments inside multiline value
+=====
+foo (
+  # This is NOT a comment but part of the value assignment!
+  bar = barValue
+) # This is a comment
+
+foo (
+  /*
+    * This is NOT a comment but part of the value assignment!
+    */
+  bar = barValue
+) /* This is a comment */
+
+---
+
+(typoscript
+  (multiline_line
+    (identifier)
+    (multiline_value
+      (multiline_value_content))
+    (single_line_comment))
+  (multiline_line
+    (identifier)
+    (multiline_value
+      (multiline_value_content))
+    (comment)))
+
+=====
+Comments in assignments
+=====
+foo = bar // This is NOT a comment but part of the value assignment!
+
+foo = bar /* This is NOT a comment but part of the value assignment! */
+
+---
+
+(typoscript
+  (assignment_line
+    (identifier)
+    (value))
+  (assignment_line
+    (identifier)
+    (value)))

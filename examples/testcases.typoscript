@@ -1,0 +1,659 @@
+# From: test/corpus/conditions/typo3.txtt
+
+# Application context checks
+[applicationContext == "Development"]
+[applicationContext == "Production"]
+[applicationContext matches "/^Production/"]
+[applicationContext starts with "Production"]
+
+# Page context checks
+[page.uid == 2]
+[page.uid in [17, 24]]
+[page.uid not in [17, 24]]
+[page.uid in 10..20]
+[page.backend_layout == 5]
+[page.backend_layout == "example_layout"]
+[page.backend_layout in ['2', '3', '4', '5']]
+[page.title == "foo"]
+[page.title matches "/^foo/"]
+
+# Tree context checks
+[tree.level == 0]
+[tree.level in [0, 1, 2]]
+[tree.pagelayout === "2"]
+[tree.pagelayout == "pagets__Home"]
+[tree.pagelayout in ['2', '3', '4', '5']]
+[tree.rootLine[0]["uid"] == 1]
+[2 in tree.rootLineIds]
+[2 in tree.rootLineParentIds]
+
+# Backend user checks
+[backend.user.isAdmin]
+[backend.user.isLoggedIn]
+[backend.user.userId == 5]
+[2 in backend.user.userGroupIds]
+[like(","~backend.user.userGroupList~", ", "*,1,*")]
+
+# Frontend user checks
+[frontend.user.isLoggedIn]
+[frontend.user.userId == 5]
+[4 in frontend.user.userGroupIds]
+[like(","~frontend.user.userGroupList~", ", "*,1,*")]
+
+# Workspace checks
+[workspace.workspaceId == 0]
+[workspace.isLive]
+[workspace.isOffline]
+
+# TYPO3 version checks
+[typo3.version == "13.4.0"]
+[typo3.version == "13.4"]
+[typo3.branch == "13.4"]
+[typo3.devIpMask == "172.18.0.6"]
+[like(typo3.branch, "/1[01]\..*/")]
+
+# Date functions
+[date("j") == 7]
+[date("w") == 7]
+[date("z") == 7]
+[date("G") == 7]
+
+# String matching
+[like("fooBarBaz", "*Bar*")]
+[like("fooBarBaz", "f?oBa?Baz")]
+[like("fooBarBaz", "/f[o]{2,2}[aBrz]+/")]
+
+# Array traversal
+[request && traverse(request.getQueryParams(), 'tx_news_pi1/news') > 0]
+[traverse(page ?? [], "pid") == 65]
+[traverse(page, "pid") == 65]
+
+# Environment variables
+[getenv("VIRTUAL_HOST") == "www.example.org"]
+[getenv("TYPO3_CONTEXT") == "Production"]
+
+# Feature flags
+[feature("security.frontend.enforceContentSecurityPolicy") === true]
+
+# IP matching
+[ip("172.18.*")]
+[ip("devIP")]
+
+# Request parameters
+[request && request.getQueryParams()['tx_news_pi1']['news'] > 0]
+[request && traverse(request.getParsedBody(), 'foo') == 1]
+[request && request.getHeaders()['Accept'] == 'json']
+[request && request.getCookieParams()['foo'] == 1]
+[request && request.getNormalizedParams().isHttps()]
+[request && request.getPageArguments()['foo_id'] > 0]
+
+# Session access
+[session("foo|bar") == "1234567"]
+
+# Site information
+[site("identifier") == "my_site"]
+[site("base").getHost() == "www.example.org"]
+[site("base").getPath() == "/"]
+[site("rootPageId") == 1]
+[traverse(site("configuration"), 'myCustomProperty') == true]
+
+# Site language
+[siteLanguage("languageId") == 1]
+[siteLanguage("locale").getName() == "en-GB"]
+[siteLanguage("locale").getCountryCode() == "US"]
+[siteLanguage("title") == "Italy"]
+[siteLanguage("typo3Language") == "default"]
+[siteLanguage("hreflang") == "en"]
+[siteLanguage("fallbackType") == "strict"]
+[siteLanguage("fallbackLanguageIds") == "1,0"]
+[like(","~siteLanguage("fallbackLanguageIds")~", ", "*,1,*")]
+
+# Locale information
+[locale().getName() == "en-US"]
+[locale().getCountryCode() == "US"]
+[locale().isRightToLeftLanguage()]
+
+# TYPO3 version compatibility
+[compatVersion("13.4")]
+[compatVersion("13.4.0")]
+
+# Constants in conditions
+[{$tx_my_extension.settings.feature1Enabled} == 1]
+[{$tx_my_extension.settings.feature1Enabled} === "1"]
+[{$tx_my_extension.settings.feature1Enabled} == "active"]
+["{$tx_my_extension.settings.feature1Enabled}" == "active"]
+["{$tx_my_extension.settings.feature1Enabled}" === "active"]
+
+# Complex conditions with page traversal
+[traverse(page, 'uid') in [1, 2, 3] && page.doktype == 1]
+[traverse(page, 'title') matches "/^Home/"]
+[traverse(page, 'backend_layout') in ['2', '3']]
+[traverse(page, 'title') == "Home"]
+
+# Complex array operations
+[2 in backend.user.userGroupIds && 5 in frontend.user.userGroupIds]
+[like(","~backend.user.userGroupList~", ", "*,1,*")]
+[like(","~frontend.user.userGroupList~", ", "*,1,*")]
+
+# Multi-level checks with site and user
+[site("identifier") == "corporate_site" && backend.user.isLoggedIn]
+[site("base").getHost() == "example.org" && workspace.isLive]
+
+# Date-based conditions
+[date("Y") == "2024"]
+[date("m") >= 6 && date("m") <= 8]
+[date("d") == 25]
+
+# Advanced traversal with fallbacks
+[traverse(page, 'teaser') ?? traverse(page, 'subtitle') ?? "Default"]
+[traverse(page, 'image') && traverse(page, 'image').uid > 0]
+
+# Combined TYPO3 and Symfony EL patterns
+[page.title ~ " (" ~ site("title") ~ ")"]
+[user.name ~ " (" ~ backend.user.firstName ~ " " ~ backend.user.lastName ~ ")"]
+
+# Conditional rendering based on multiple factors
+[backend.user.isAdmin && (page.doktype == 1 || page.doktype == 2)]
+[frontend.user.isLoggedIn && workspace.isLive && page.hidden == 0]
+
+# Complex nested conditions
+[(traverse(page, 'categories') && traverse(page, 'categories')|length > 0) && page.nav_hide == 0]
+[(backend.user.isAdmin || frontend.user.isLoggedIn) && applicationContext != "Development"]
+
+# From: test/corpus/conditions/operators.txtt
+
+# Basic Arithmetic
+[1 + 2]
+
+# Power Operator
+[2 ** 3]
+
+# Bitwise AND
+[5 & 3]
+
+# Bitwise NOT
+[~5]
+
+# Comparison
+[a == b]
+
+# String Concatenation
+["hello" ~ "world"]
+
+# Array In
+[x in [1, 2, 3]]
+
+# Range
+[1..5]
+
+# Null Coalescing
+[foo ?? bar]
+
+# Null Safe Property
+[user?.name]
+
+# Ternary
+[a ? b : c]
+
+# Logical AND
+[a and b]
+
+# Parentheses
+[(1 + 2) * 3]
+
+# String Contains
+["hello" contains "ell"]
+
+# String Starts With
+["hello" starts with "he"]
+
+# String Ends With
+["hello" ends with "lo"]
+
+# String Matches
+["hello" matches "/h.*o/"]
+
+# Array Not In
+["x" not in [1, 2, 3]]
+
+# Bitwise Left Shift
+[1 << 2]
+
+# Bitwise Right Shift
+[8 >> 2]
+
+# Bitwise XOR
+[5 ^ 3]
+
+# Bitwise OR
+[5 | 3]
+
+# Complex Ternary
+[a ? (b ? c : d) : e]
+
+# From: test/corpus/conditions/comments.txtt
+
+# Block Comment
+[/* this is a comment */]
+
+# Comment After Expression
+[true /* comment after expression */]
+
+# Comment Before Expression
+[/* comment */ true]
+
+# Comment Between Expressions
+[true /* comment */ false]
+
+# Comments anywhere
+[user.name.test /* comment after expression */ .value]
+
+# From: test/corpus/conditions/property_access.txtt
+
+# Property Access
+[user.name]
+
+# Method Call
+[user.getName()]
+
+# Array Access
+[items[0]]
+
+# Chained Access
+[data.items[0]]
+
+# Nested Property Access
+[user.address.street]
+
+# Method on Property
+[user.address.getStreet()]
+
+# Predefined chained method calls
+[request.getRequestBody().address.getStreet()]
+
+# From: test/corpus/conditions/functions.txtt
+
+# constant Function
+[constant("APP_DEBUG")]
+
+# Enum Function
+[enum("App\\SomeNamespace\\Foo::Bar")]
+
+# Min Function
+[min(1, 2, 3)]
+
+# Max Function
+[max(1, 2, 3)]
+
+# Custom Function
+[custom_func()]
+
+# From: test/corpus/conditions/base.txtt
+
+# Application Context
+[applicationContext == "Development"]
+[applicationContext == "Production/Staging"]
+
+# Language Selection
+[siteLanguage("locale") == "en_US.UTF-8"]
+[siteLanguage("title") == "English"]
+
+# With Get Parameter: e.g., &print=1
+[request.getQueryParams() ['print'] > 0]
+[traverse(request.getQueryParams(), 'tx_news_pi1/news') > 0]
+
+# Single Page WITHOUT Subpages
+[traverse(page, "uid") == 17]
+[traverse(page, "uid") in [17,24]]
+[getTSFE().id == 17]
+[getTSFE().id in [17,24]]
+
+# Page ID AND its Subpages
+[17 in tree.rootLineIds || 24 in tree.rootLineIds]
+
+# ONLY Subpages of the specified Page ID, not the selected page itself
+[17 in tree.rootLineParentIds || 24 in tree.rootLineParentIds]
+
+# Domain
+[request.getNormalizedParams().getHttpHost() == 'www.example.org']
+[like(request.getNormalizedParams().getHttpHost(), '*.test')]
+
+# Protocol
+[request.getNormalizedParams().isHttps() == false]
+
+# Query Page Properties (FE only)
+[traverse(page, "backend_layout") == 'pagets__2_columns_33_66']
+
+# Query Page Properties (FE and BE)
+[tree.pagelayout == 1]
+[tree.pagelayout == "pagets__1Column"]
+
+# User Groups
+[usergroup("1,2")]
+
+# Frontend User
+// Logged in as any frontend user:
+[loginUser('*')]
+[frontend.user.isLoggedIn == 1]
+ 
+# Logged in as a specific frontend user:
+[frontend.user.userId == 2]
+ 
+# Logged in as one of the listed frontend users:
+[loginUser('1,2')]
+[frontend.user.userId in [1,2]]
+ 
+# Currently not logged in on the frontend:
+[loginUser('*') == false]
+
+# Frontend User Logged in to Backend?
+[getTSFE().isBackendUserLoggedIn()]
+
+[backend.user.isLoggedIn]
+[backend.user.isAdmin]
+[backend.user.userId == 2]
+
+# Read Constant greater than 10
+[{$constant} > 10]
+
+# Read Values from Site Configuration
+[site("identifier") == "mysite"]
+[site("base") == "http://local.test/"]
+
+# Conditions [global] and [else]
+[Condition]
+page.10.value = Internet Explorer
+[ELSE]
+page.10.value = No Internet Explorer!
+[END]
+ 
+# negate condition
+[Condition]
+[else]
+page.10.value = foobar
+[end]
+
+# Conditions && and ||
+// AND
+[Condition1 && Condition2]
+ 
+# OR
+[Condition1 || Condition2] 
+ 
+# OR mixed with AND
+[frontend.user.isLoggedIn == 1 || getTSFE().id == 75 && siteLanguage("title") == "English"]
+test = 1
+
+# Conditions negate
+[!Condition1]
+
+[Condition1 && !Condition2]
+
+# From: test/corpus/conditions/complex.txtt
+
+# Complex Expressions
+[(a + b) * c]
+
+# Complex Logical Expression
+[user.age >= 18 and user.isActive]
+
+# Chained Array and Property Access
+[items[0].name]
+
+# Complex Ternary
+[condition ? trueValue : falseValue]
+
+# Complex Unary with Logical
+[not (a or b) and c]
+
+# Function with Property Argument
+[func(arg1, arg2.property)]
+
+# Method Call Chain
+[object.method().property]
+
+# Array Access with Method Call
+[array[index].method(arg)]
+
+# Complex Nested Access
+[data["key"].nested.property]
+
+# From: test/corpus/comments.txtt
+
+# Single line comment
+# comment
+// comment
+/* comment */
+
+# Multi line comment
+/* comment
+over
+multiple
+lines
+*/
+
+# Comments with different operators
+foo < bar // This is a comment
+foo < bar /* This is a valid comment, too */
+
+foo > # Another valid comment
+
+foo := addToList(1) # Yes, a comment
+
+[foo == bar] # Many comment. Much wow.
+
+# Comments inside multiline value
+foo (
+  # This is NOT a comment but part of the value assignment!
+  bar = barValue
+) # This is a comment
+
+foo (
+  /*
+    * This is NOT a comment but part of the value assignment!
+    */
+  bar = barValue
+) /* This is a comment */
+
+# Comments in assignments
+foo = bar // This is NOT a comment but part of the value assignment!
+
+foo = bar /* This is NOT a comment but part of the value assignment! */
+
+# From: test/corpus/conditions/literals.txtt
+
+# Basic Literals
+[true]
+
+# Boolean False
+[false]
+
+# Null
+[null]
+
+# Integer
+[42]
+
+# Integer with Underscores
+[1_000_000]
+
+# Float
+[3.14]
+
+# Float with Underscores
+[3.14159_26535]
+
+# Decimal without Leading Zero
+[.99]
+
+# Decimal without Leading Zero with Underscores
+[.14159_26535]
+
+# Exponent Notation
+[1.99E+3]
+
+# Simple Exponent
+[2e-5]
+
+# Exponent with Underscores
+[1_000E+2_000]
+
+# Double Quoted String
+["hello world"]
+
+# Single Quoted String
+['string test']
+
+# String with Multiple Escapes
+["\n\r\"\t\\"]
+
+# Simple Array
+[[1, 2, 3]]
+
+# String Array
+[["a", "b", "c"]]
+
+# Simple Object
+[{"key": "value"}]
+
+# Complex Object
+[{"name": "John", "age": 30}]
+
+# Object with Unquoted Keys
+[{foo: "bar"}]
+
+# Mixed Object Keys
+[{"quoted": 1, unquoted: 2}]
+
+# From: test/corpus/conditions/arrays_objects.txtt
+
+# Arrays and Objects
+[[1, 2, 3]]
+
+# String Array
+[["a", "b", "c"]]
+
+# Mixed Array
+[[1, "mixed", true]]
+
+# Simple Object
+[{"key": "value"}]
+
+# Complex Object
+[{"name": "John", "age": 30}]
+
+# Nested Object
+[{"nested": {"inner": "value"}}]
+
+# From: test/corpus/assignment.txtt
+
+# Assignment
+foo = bar
+
+page = PAGE
+
+# Assignment with html code
+foo = <ul>
+
+# Assignment XML prologue sitemap
+foo = <?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">|</urlset>
+
+# Nested assignment
+foo.bar = baz
+
+# Double nested assignment
+foo.bar.baz = baz
+
+# Assignment with comment (comment has to be treated as part of the value)
+foo = bar # comment
+
+# Assignment with parenthese like multiline value but isn't
+foo = (
+
+# Assignment with constant
+foo = {$foo.bar}
+foo = {$foo.bar ?? $foo.baz}
+
+# Assignment with multiline value
+foo (
+bar
+)
+
+# Assignment with multiline value and constant
+foo (
+bar {$test} baz
+foobar
+)
+
+# Assignment with multiline value and parentheses inline
+foo (
+bar (baz
+foobar)
+test
+)
+
+# Assign with data fields
+20.wrap = |{register:newLine}
+
+# From: test/corpus/configuration.txtt
+
+# Reference assignment
+foo =< bar
+
+# Reference assignment with whitespace
+foo = < bar
+
+# Copy
+foo < bar
+
+# Copy with comment
+foo < bar # Something
+
+# Copy nested
+myIdentifier {
+   20 < myIdentifier.10
+}
+
+# Copy nested relative
+myIdentifier {
+   20 < .10
+}
+
+# Deletion
+foo >
+
+# Deletion with comment
+foo > # Something
+
+# Modification
+foo:=addToList(123)
+
+# Modification with comment
+foo := addToList(123) # Something
+
+# Modification with brace and user defined function
+foo := addToListTest(x-inf())
+
+# From: test/corpus/imports.txtt
+
+# Include old syntax
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:foo/Configuration/TypoScript/setup.typoscript">
+
+# Include old syntax, no space
+<INCLUDE_TYPOSCRIPT:source="FILE:EXT:foo/Configuration/TypoScript/setup.typoscript">
+
+# Include old syntax with extensions
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:foo/Configuration/TypoScript/setup.typoscript" extensions="typoscript">
+
+# Include old syntax with condition
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:foo/Configuration/TypoScript/setup.typoscript" condition="YourVendor\YourPackage\YourCondition">
+
+# Import new syntax single quotes
+@import 'EXT:foo/Configuration/TypoScript/setup.typoscript'
+
+# Import new syntax double quotes
+@import "EXT:foo/Configuration/TypoScript/setup.typoscript"
+
+# Import new syntax wildcard
+@import "EXT:foo/Configuration/TypoScript/*.typoscript"
+test = */

@@ -7,6 +7,7 @@ foo = bar
 page = PAGE
 
 ---
+
 (typoscript
   (assignment_line
     (identifier)
@@ -15,7 +16,6 @@ page = PAGE
     (identifier)
     (cobject)))
 
-
 ====
 Assignment with html code
 ====
@@ -23,12 +23,27 @@ Assignment with html code
 foo = <ul>
 
 ---
+
 (typoscript
   (assignment_line
     (identifier)
     (value)
     (value)))
 
+====
+Assignment XML prologue sitemap
+====
+
+foo = <?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">|</urlset>
+
+---
+
+(typoscript
+  (assignment_line
+    (identifier)
+    (value)
+    (value)
+    (value)))
 
 ====
 Nested assignment
@@ -37,11 +52,11 @@ Nested assignment
 foo.bar = baz
 
 ---
+
 (typoscript
   (assignment_line
     (identifier)
     (value)))
-
 
 ====
 Double nested assignment
@@ -50,12 +65,11 @@ Double nested assignment
 foo.bar.baz = baz
 
 ---
+
 (typoscript
   (assignment_line
     (identifier)
     (value)))
-
-
 
 ====
 Assignment with comment (comment has to be treated as part of the value)
@@ -64,27 +78,47 @@ Assignment with comment (comment has to be treated as part of the value)
 foo = bar # comment
 
 ---
+
 (typoscript
   (assignment_line
     (identifier)
     (value)))
 
-
 ====
-Assignment with parenthese like multiline value but isn't 
+Assignment with parenthese like multiline value but isn't
 ====
 
 foo = (
 
 ---
+
 (typoscript
   (assignment_line
     (identifier)
     (value)))
 
+====
+Assignment with constant
+====
+
+foo = {$foo.bar}
+foo = {$foo.bar ?? $foo.baz}
+
+---
+
+(typoscript
+  (assignment_line
+    (identifier)
+    (value
+      (constant)))
+  (assignment_line
+    (identifier)
+    (value
+      (constant
+        (constant_null_coalescing)))))
 
 ====
-Assignment with multiline value 
+Assignment with multiline value
 ====
 
 foo (
@@ -92,15 +126,15 @@ bar
 )
 
 ---
+
 (typoscript
   (multiline_line
     (identifier)
-    (multiline_value)))
-
-
+    (multiline_value
+      (multiline_value_content))))
 
 ====
-Assignment with multiline value and constant 
+Assignment with multiline value and constant
 ====
 
 foo (
@@ -109,12 +143,13 @@ foobar
 )
 
 ---
+
 (typoscript
   (multiline_line
     (identifier)
     (multiline_value
-      (constant))))
-
+      (multiline_value_content
+        (constant)))))
 
 ====
 Assignment with multiline value and parentheses inline
@@ -127,7 +162,22 @@ test
 )
 
 ---
+
 (typoscript
   (multiline_line
     (identifier)
-    (multiline_value)))
+    (multiline_value
+      (multiline_value_content))))
+
+====
+Assign with data fields
+====
+
+20.wrap = |{register:newLine}
+
+---
+
+(typoscript
+  (assignment_line
+    (identifier)
+    (value)))

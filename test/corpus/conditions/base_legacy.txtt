@@ -1,0 +1,596 @@
+====
+Application Context
+====
+
+[applicationContext = Staging]
+[applicationContext = Production/Staging]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_built_in_variable))
+      (ERROR)
+      (symfony_expression
+        (symfony_variable))))
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_built_in_variable))
+      (ERROR)
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_variable))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_variable)))))))
+
+====
+Language Selection
+====
+
+[globalVar = GP:L = 1]
+ 
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_variable))
+      (ERROR)
+      (symfony_expression
+        (symfony_variable))
+      (ERROR)
+      (symfony_expression
+        (symfony_variable))
+      (ERROR)
+      (symfony_expression
+        (symfony_literal
+          (symfony_number))))))
+
+====
+With Get Parameter: e.g., &print=1
+====
+
+[globalVar = GP:print > 0]
+ 
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_variable))
+      (ERROR)
+      (symfony_expression
+        (symfony_variable))
+      (ERROR)
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_variable))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_literal
+              (symfony_number))))))))
+
+====
+Single Page WITHOUT Subpages
+====
+
+[globalVar = TSFE:id=17, TSFE:id=24] 
+// OR 
+[globalVar = TSFE:page|pid=17, TSFE:page|pid=24]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_variable))
+      (ERROR)
+      (symfony_expression
+        (symfony_variable))
+      (ERROR)
+      (symfony_expression
+        (symfony_variable))
+      (ERROR)
+      (symfony_expression
+        (symfony_literal
+          (symfony_number)))
+      (ERROR)
+      (symfony_expression
+        (symfony_variable))
+      (ERROR)
+      (symfony_expression
+        (symfony_variable))
+      (ERROR)
+      (symfony_expression
+        (symfony_literal
+          (symfony_number))))
+    (single_line_comment))
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_variable))
+      (ERROR)
+      (symfony_expression
+        (symfony_variable))
+      (ERROR)
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_built_in_variable))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_variable))))
+      (ERROR)
+      (symfony_expression
+        (symfony_literal
+          (symfony_number)))
+      (ERROR)
+      (symfony_expression
+        (symfony_variable))
+      (ERROR)
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_built_in_variable))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_variable))))
+      (ERROR)
+      (symfony_expression
+        (symfony_literal
+          (symfony_number))))))
+
+====
+Page ID AND its Subpages
+====
+
+[PIDinRootline = 17, 24]
+ 
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_variable))
+      (ERROR)
+      (symfony_expression
+        (symfony_literal
+          (symfony_number)))
+      (ERROR)
+      (symfony_expression
+        (symfony_literal
+          (symfony_number))))))
+
+====
+ONLY Subpages of the specified Page ID, not the selected page itself
+====
+
+[PIDupinRootline = 17, 24]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_variable))
+      (ERROR)
+      (symfony_expression
+        (symfony_literal
+          (symfony_number)))
+      (ERROR)
+      (symfony_expression
+        (symfony_literal
+          (symfony_number))))))
+
+====
+Level on the rootline. 0 is root
+====
+
+[treeLevel = 0,2]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_variable))
+      (ERROR)
+      (symfony_expression
+        (symfony_literal
+          (symfony_number)))
+      (ERROR)
+      (symfony_expression
+        (symfony_literal
+          (symfony_number))))))
+
+====
+Domain
+====
+
+[globalString = IENV:HTTP_HOST = subdomain*]
+[globalString = IENV:HTTP_HOST = www.example.org]
+ 
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_variable))
+      (ERROR)
+      (symfony_expression
+        (symfony_variable))
+      (ERROR)
+      (symfony_expression
+        (symfony_variable))
+      (ERROR)
+      (symfony_expression
+        (symfony_variable))
+      (ERROR
+        (symfony_condition_operator))))
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_variable))
+      (ERROR)
+      (symfony_expression
+        (symfony_variable))
+      (ERROR)
+      (symfony_expression
+        (symfony_variable))
+      (ERROR)
+      (symfony_expression
+        (symfony_property_access
+          (symfony_property_access
+            (symfony_variable)
+            (symfony_property))
+          (symfony_property))))))
+
+====
+Query Page Properties (FE only)
+====
+
+[globalVar = TSFE:page|backend_layout = 1]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_variable))
+      (ERROR)
+      (symfony_expression
+        (symfony_variable))
+      (ERROR)
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_built_in_variable))
+              (symfony_condition_operator)
+          (symfony_expression
+            (symfony_variable))))
+      (ERROR)
+      (symfony_expression
+        (symfony_literal
+          (symfony_number))))))
+
+====
+Query Page Properties (FE and BE)
+====
+
+[page|backend_layout = 1]
+ 
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_built_in_variable))
+              (symfony_condition_operator)
+          (symfony_expression
+            (symfony_variable))))
+      (ERROR)
+      (symfony_expression
+        (symfony_literal
+          (symfony_number))))))
+
+====
+User Groups
+====
+
+[usergroup = *]
+[usergroup = 1,2]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (ERROR
+        (symfony_predefined_function)
+        (symfony_condition_operator))
+      (symfony_expression
+        (symfony_literal
+          (symfony_array
+            (ERROR
+              (symfony_predefined_function))
+            (symfony_expression
+              (symfony_literal
+                (symfony_number)))
+            (symfony_expression
+              (symfony_literal
+                (symfony_number))))))
+                    (MISSING "]"))))
+
+====
+Frontend User
+====
+
+[loginUser = *]
+[loginUser = 1,2]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (ERROR
+        (symfony_predefined_function)
+        (symfony_condition_operator))
+      (symfony_expression
+        (symfony_literal
+          (symfony_array
+            (ERROR
+              (symfony_predefined_function))
+            (symfony_expression
+              (symfony_literal
+                (symfony_number)))
+            (symfony_expression
+              (symfony_literal
+                (symfony_number))))))
+                    (MISSING "]"))))
+
+====
+Username
+====
+
+[globalString = TSFE:fe_user|user|username = johndoe]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_variable))
+      (ERROR)
+      (symfony_expression
+        (symfony_variable))
+      (ERROR)
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_binary_expression
+              (symfony_expression
+                (symfony_variable))
+              (symfony_condition_operator)
+              (symfony_expression
+                (symfony_variable))))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_variable))))
+      (ERROR)
+      (symfony_expression
+        (symfony_variable)))))
+
+====
+Frontend User Logged in to Backend?
+====
+
+[globalVar = TSFE : beUserLogin > 0]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_variable))
+      (ERROR)
+      (symfony_expression
+        (symfony_variable))
+      (ERROR)
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_variable))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_literal
+              (symfony_number))))))))
+
+====
+Read Constant greater than 10
+====
+
+[globalVar = LIT:10 < {$konstante}]
+ 
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_variable))
+      (ERROR)
+      (symfony_expression
+        (symfony_variable))
+      (ERROR)
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_literal
+              (symfony_number)))
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_literal
+              (constant))))))))
+
+====
+Custom Function
+====
+
+[userFunc = Funktionsname(Parameter)]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_variable))
+      (ERROR)
+      (symfony_expression
+        (symfony_function_call
+          (symfony_function)
+          (symfony_function_parameter
+            (symfony_variable)))))))
+
+====
+Is Extension Installed?
+====
+
+[userFunc = TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('extkey')]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_variable))
+      (ERROR)
+      (symfony_expression
+        (symfony_variable))
+      (ERROR)
+      (symfony_expression
+        (symfony_variable))
+      (ERROR)
+      (symfony_expression
+        (symfony_variable))
+      (ERROR)
+      (symfony_expression
+        (symfony_variable))
+      (ERROR)
+      (symfony_expression
+        (symfony_variable))
+      (ERROR)
+      (symfony_expression
+        (symfony_function_call
+          (symfony_function)
+          (symfony_function_parameter
+            (symfony_literal
+              (symfony_string))))))))
+
+====
+Conditions AND/OR pre TYPO3 9
+====
+ 
+// AND
+[Condition1] && [Condition2]
+[Condition1] AND [Condition2]
+
+// OR
+[Condition1][Condition2]
+[Condition1] || [Condition2]
+[Condition1] OR [Condition2]
+
+// OR mixed with AND
+[browser = firefox] || [browser = msie] && [version => 8]
+
+---
+
+(typoscript
+  (single_line_comment)
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_variable)))
+    (condition_bool_legacy)
+    (condition
+      (symfony_expression
+        (symfony_variable))))
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_variable)))
+    (condition_bool_legacy)
+    (condition
+      (symfony_expression
+        (symfony_variable)))
+    (single_line_comment))
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_variable)))
+    (condition
+      (symfony_expression
+        (symfony_variable))))
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_variable)))
+    (condition_bool_legacy)
+    (condition
+      (symfony_expression
+        (symfony_variable))))
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_variable)))
+    (condition_bool_legacy)
+    (condition
+      (symfony_expression
+        (symfony_variable)))
+    (single_line_comment))
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_variable))
+      (ERROR)
+      (symfony_expression
+        (symfony_variable)))
+    (condition_bool_legacy)
+    (condition
+      (symfony_expression
+        (symfony_variable))
+      (ERROR)
+      (symfony_expression
+        (symfony_variable)))
+    (condition_bool_legacy)
+    (condition
+      (symfony_expression
+        (symfony_binary_expression
+          (symfony_expression
+            (symfony_variable))
+          (ERROR)
+          (symfony_condition_operator)
+          (symfony_expression
+            (symfony_literal
+              (symfony_number))))))))

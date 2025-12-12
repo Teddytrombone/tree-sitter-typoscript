@@ -1,0 +1,98 @@
+====================
+constant Function
+====================
+
+[constant("APP_DEBUG")]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_function_call
+          (symfony_predefined_function)
+          (symfony_function_parameter
+            (symfony_literal
+              (symfony_string))))))))
+
+====================
+Enum Function
+====================
+
+[enum("App\\SomeNamespace\\Foo::Bar")]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_function_call
+          (symfony_predefined_function)
+          (symfony_function_parameter
+            (symfony_literal
+              (symfony_string))))))))
+
+====================
+Min Function
+====================
+
+[min(1, 2, 3)]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_function_call
+          (symfony_predefined_function)
+          (symfony_function_parameter
+            (symfony_literal
+              (symfony_number)))
+          (symfony_function_parameter
+            (symfony_literal
+              (symfony_number)))
+          (symfony_function_parameter
+            (symfony_literal
+              (symfony_number))))))))
+
+====================
+Max Function
+====================
+
+[max(1, 2, 3)]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_function_call
+          (symfony_predefined_function)
+          (symfony_function_parameter
+            (symfony_literal
+              (symfony_number)))
+          (symfony_function_parameter
+            (symfony_literal
+              (symfony_number)))
+          (symfony_function_parameter
+            (symfony_literal
+              (symfony_number))))))))
+
+====================
+Custom Function
+====================
+
+[custom_func()]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_function_call
+          (symfony_function))))))

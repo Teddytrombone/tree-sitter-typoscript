@@ -1,6 +1,12 @@
 (identifier) @variable.member
 
+(symfony_variable) @variable
+
 (constant) @constant
+
+(symfony_function) @function.call
+
+(symfony_method) @function.method.call
 
 [
   (modifier_function)
@@ -13,21 +19,43 @@
 ] @function.builtin
 
 [
+  (symfony_function_parameter)
+  (symfony_method_parameter)
+  (modifier_parameter)
+] @variable.parameter
+
+(symfony_function_parameter
+  (symfony_variable) @variable.parameter)
+
+(symfony_method_parameter
+  (symfony_variable) @variable.parameter)
+
+[
   (condition)
   (condition_end)
   (condition_else)
 ] @keyword.conditional
+
+((condition
+  "[" @keyword.conditional)
+  (#set! "priority" 110))
+
+((condition
+  "]" @keyword.conditional)
+  (#set! "priority" 110))
 
 [
   "@import"
   "INCLUDE_TYPOSCRIPT"
 ] @keyword.import
 
+(condition_attribute) @tag.attribute
+
 (cobject) @type.builtin
 
 (symfony_built_in_variable) @variable.builtin
 
-(symfony_variable) @variable
+(symfony_property) @variable.member
 
 [
   (comment)
@@ -36,12 +64,9 @@
 
 [
   (string)
-  (multiline_value)
+  (multiline_value_content)
   (symfony_string)
 ] @string
-
-(assignment_line
-  "=" @operator)
 
 (reference_line
   "=<" @operator)
@@ -56,6 +81,9 @@
   ":=" @operator)
 
 [
+  "="
+  "."
+  "?."
   (symfony_condition_operator)
   (condition_bool_legacy)
   (constant_null_coalescing)
@@ -79,3 +107,5 @@
 (symfony_number) @number
 
 (symfony_boolean) @boolean
+
+(symfony_null) @constant.builtin

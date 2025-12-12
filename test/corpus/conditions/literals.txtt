@@ -1,0 +1,362 @@
+====================
+Basic Literals
+====================
+
+[true]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_literal
+          (symfony_boolean))))))
+
+====================
+Boolean False
+====================
+
+[false]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_literal
+          (symfony_boolean))))))
+
+====================
+Null
+====================
+
+[null]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_literal
+          (symfony_null))))))
+
+====================
+Integer
+====================
+
+[42]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_literal
+          (symfony_number))))))
+
+====================
+Integer with Underscores
+====================
+
+[1_000_000]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_literal
+          (symfony_number))))))
+
+====================
+Float
+====================
+
+[3.14]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_literal
+          (symfony_number))))))
+
+====================
+Float with Underscores
+====================
+
+[3.14159_26535]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_literal
+          (symfony_number))))))
+
+====================
+Decimal without Leading Zero
+====================
+
+[.99]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_literal
+          (symfony_number))))))
+
+====================
+Decimal without Leading Zero with Underscores
+====================
+
+[.14159_26535]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_literal
+          (symfony_number))))))
+
+====================
+Exponent Notation
+====================
+
+[1.99E+3]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_literal
+          (symfony_number))))))
+
+====================
+Simple Exponent
+====================
+
+[2e-5]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_literal
+          (symfony_number))))))
+
+====================
+Exponent with Underscores
+====================
+
+[1_000E+2_000]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_literal
+          (symfony_number))))))
+
+====================
+Double Quoted String
+====================
+
+["hello world"]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_literal
+          (symfony_string))))))
+
+====================
+Single Quoted String
+====================
+
+['string test']
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_literal
+          (symfony_string))))))
+
+====================
+String with Multiple Escapes
+====================
+
+["\n\r\"\t\\"]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_literal
+          (symfony_string))))))
+
+====================
+Simple Array
+====================
+
+[[1, 2, 3]]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_literal
+          (symfony_array
+            (symfony_expression
+              (symfony_literal
+                (symfony_number)))
+            (symfony_expression
+              (symfony_literal
+                (symfony_number)))
+            (symfony_expression
+              (symfony_literal
+                (symfony_number)))))))))
+
+====================
+String Array
+====================
+
+[["a", "b", "c"]]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_literal
+          (symfony_array
+            (symfony_expression
+              (symfony_literal
+                (symfony_string)))
+            (symfony_expression
+              (symfony_literal
+                (symfony_string)))
+            (symfony_expression
+              (symfony_literal
+                (symfony_string)))))))))
+
+====================
+Simple Object
+====================
+
+[{"key": "value"}]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_literal
+          (symfony_object
+            (symfony_pair
+              (symfony_string)
+              (symfony_expression
+                (symfony_literal
+                  (symfony_string))))))))))
+
+====================
+Complex Object
+====================
+
+[{"name": "John", "age": 30}]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_literal
+          (symfony_object
+            (symfony_pair
+              (symfony_string)
+              (symfony_expression
+                (symfony_literal
+                  (symfony_string))))
+            (symfony_pair
+              (symfony_string)
+              (symfony_expression
+                (symfony_literal
+                  (symfony_number))))))))))
+
+====================
+Object with Unquoted Keys
+====================
+
+[{foo: "bar"}]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_literal
+          (symfony_object
+            (symfony_pair
+              (symfony_variable)
+              (symfony_expression
+                (symfony_literal
+                  (symfony_string))))))))))
+
+====================
+Mixed Object Keys
+====================
+
+[{"quoted": 1, unquoted: 2}]
+
+---
+
+(typoscript
+  (condition_block
+    (condition
+      (symfony_expression
+        (symfony_literal
+          (symfony_object
+            (symfony_pair
+              (symfony_string)
+              (symfony_expression
+                (symfony_literal
+                  (symfony_number))))
+            (symfony_pair
+              (symfony_variable)
+              (symfony_expression
+                (symfony_literal
+                  (symfony_number))))))))))
