@@ -17,7 +17,7 @@
           },
           {
             "type": "SYMBOL",
-            "name": "condition_end"
+            "name": "_condition_end_line"
           }
         ]
       }
@@ -1057,8 +1057,13 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "condition_else"
+              "type": "ALIAS",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_condition_else"
+              },
+              "named": true,
+              "value": "condition"
             },
             {
               "type": "REPEAT1",
@@ -1120,16 +1125,73 @@
         ]
       }
     },
-    "condition_else": {
-      "type": "PATTERN",
-      "value": "\\[[eE][lL][sS][eE]\\]"
-    },
-    "condition_end": {
+    "_condition_else": {
       "type": "SEQ",
       "members": [
         {
-          "type": "PATTERN",
-          "value": "\\[([eE][nN][dD]|[gG][lL][oO][bB][aA][lL])\\]"
+          "type": "STRING",
+          "value": "["
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "PATTERN",
+            "value": "[eE][lL][sS][eE]"
+          },
+          "named": true,
+          "value": "condition_else"
+        },
+        {
+          "type": "STRING",
+          "value": "]"
+        }
+      ]
+    },
+    "_condition_end": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "["
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "PATTERN",
+            "value": "([eE][nN][dD]|[gG][lL][oO][bB][aA][lL])"
+          },
+          "named": true,
+          "value": "condition_end"
+        },
+        {
+          "type": "STRING",
+          "value": "]"
+        }
+      ]
+    },
+    "_condition_end_line": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_condition_end"
+          },
+          "named": true,
+          "value": "condition"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_comments"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "STRING",

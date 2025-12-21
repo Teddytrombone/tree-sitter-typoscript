@@ -105,6 +105,14 @@
       "required": true,
       "types": [
         {
+          "type": "condition_else",
+          "named": true
+        },
+        {
+          "type": "condition_end",
+          "named": true
+        },
+        {
           "type": "symfony_comment",
           "named": true
         },
@@ -137,10 +145,6 @@
         },
         {
           "type": "condition_bool_legacy",
-          "named": true
-        },
-        {
-          "type": "condition_else",
           "named": true
         },
         {
@@ -184,11 +188,6 @@
   },
   {
     "type": "condition_bool_legacy",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "condition_end",
     "named": true,
     "fields": {}
   },
@@ -303,7 +302,7 @@
   },
   {
     "type": "identifier",
-    "named": false,
+    "named": true,
     "fields": {}
   },
   {
@@ -1086,11 +1085,11 @@
           "named": true
         },
         {
-          "type": "condition_block",
+          "type": "condition",
           "named": true
         },
         {
-          "type": "condition_end",
+          "type": "condition_block",
           "named": true
         },
         {
@@ -1301,6 +1300,10 @@
   },
   {
     "type": "condition_else",
+    "named": true
+  },
+  {
+    "type": "condition_end",
     "named": true
   },
   {

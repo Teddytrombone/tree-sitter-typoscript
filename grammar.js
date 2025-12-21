@@ -16,7 +16,7 @@ module.exports = grammar({
         typoscript: $ => repeat(choice(
             $._block_item,
             $.condition_block,
-            $.condition_end,
+            $._condition_end_line,
         )),
 
         _block_item: $ => choice(
@@ -137,16 +137,26 @@ module.exports = grammar({
 
         condition_block: $ => prec.right(seq($._condition_line, optional(repeat1($._block_item)))),
 
-        _condition_line: $ => seq(choice($.condition_else, repeat1($._condition_segment)), optional($._comments), '\n'),
+        _condition_line: $ => seq(choice(alias($._condition_else, $.condition), repeat1($._condition_segment)), optional($._comments), '\n'),
 
         _condition_inner: $ => repeat1(choice(
             seq($.symfony_expression, optional($.symfony_comment)),
             $.symfony_comment,
         )),
 
-        condition_else: $ => functions.caseInsensitive('\\[else\\]'),
+        _condition_else: $ => seq(
+            '[',
+            alias(functions.caseInsensitive('else'), $.condition_else),
+            ']',
+        ),
 
-        condition_end: $ => seq(functions.caseInsensitive('\\[(end|global)\\]'), '\n'),
+        _condition_end: $ => seq(
+            '[',
+            alias(functions.caseInsensitive('(end|global)'), $.condition_end),
+            ']',
+        ),
+
+        _condition_end_line: $ => seq(alias($._condition_end, $.condition), optional($._comments), '\n'),
 
         // Symfony Expression Language
 

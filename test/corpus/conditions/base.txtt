@@ -650,22 +650,26 @@ page.10.value = foobar
       (identifier)
       (value)))
   (condition_block
-    (condition_else)
+    (condition
+      (condition_else))
     (assignment_line
       (identifier)
       (value)))
-  (condition_end)
+  (condition
+    (condition_end))
   (single_line_comment)
   (condition_block
     (condition
       (symfony_expression
         (symfony_variable))))
   (condition_block
-    (condition_else)
+    (condition
+      (condition_else))
     (assignment_line
       (identifier)
       (value)))
-  (condition_end))
+  (condition
+    (condition_end)))
 
 ====
 Conditions && and ||
