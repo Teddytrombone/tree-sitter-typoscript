@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-typoscript",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "TypoScript grammar for tree-sitter",
   "repository": "https://github.com/teddytrombone/tree-sitter-typoscript",
   "license": "MIT",
