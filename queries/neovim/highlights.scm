@@ -4,25 +4,19 @@
 
 (constant) @constant
 
-(symfony_function) @function.call
-
 (symfony_method) @function.method.call
 
 [
   (modifier_function)
   (symfony_function)
-] @function
+] @function.call
 
 [
   (modifier_predefined)
   (symfony_predefined_function)
 ] @function.builtin
 
-[
-  (symfony_function_parameter)
-  (symfony_method_parameter)
-  (modifier_parameter)
-] @variable.parameter
+(modifier_parameter) @variable.parameter
 
 (symfony_function_parameter
   (symfony_variable) @variable.parameter)
@@ -35,14 +29,6 @@
   (condition_end)
   (condition_else)
 ] @keyword.conditional
-
-((condition
-  "[" @keyword.conditional)
-  (#set! "priority" 110))
-
-((condition
-  "]" @keyword.conditional)
-  (#set! "priority" 110))
 
 [
   "@import"
@@ -68,21 +54,16 @@
   (symfony_string)
 ] @string
 
-(reference_line
-  "=<" @operator)
-
 (deletion_line
   ">" @operator)
 
 (copy_line
   "<" @operator)
 
-(modification_line
-  ":=" @operator)
-
 [
   "="
-  "."
+  "=<"
+  ":="
   "?."
   (symfony_condition_operator)
   (condition_bool_legacy)
@@ -92,9 +73,19 @@
 (symfony_ternary_operator) @keyword.conditional.ternary
 
 ((symfony_condition_operator) @keyword.operator
-  (#match? @keyword.operator "and|or|xor|not|not in|in|contains|starts with|ends with|matches"))
+  (#any-of? @keyword.operator
+    "and" "or" "xor" "not" "not in" "in" "contains" "starts with" "ends with" "matches"))
 
-"," @punctuation.delimiter
+[
+  ","
+  "."
+] @punctuation.delimiter
+
+(symfony_property_access
+  "." @operator)
+
+(symfony_method_call
+  "." @operator)
 
 [
   "("
@@ -103,6 +94,12 @@
   "]"
   (block_punctuation)
 ] @punctuation.bracket
+
+(condition
+  "[" @punctuation.special)
+
+(condition
+  "]" @punctuation.special)
 
 (symfony_number) @number
 

@@ -32,6 +32,7 @@ tt_content.media.test =< lib.contentElement
 tt_content.media.test {
   hallo = welt
   test = <ul></ul>
+  foo\.bar\.baz = 1
 }
 
 test (

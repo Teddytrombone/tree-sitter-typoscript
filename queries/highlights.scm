@@ -1,16 +1,27 @@
 (identifier) @variable.member
 
+(symfony_variable) @variable
+
 (constant) @constant
 
 [
   (modifier_function)
   (symfony_function)
+  (symfony_method)
 ] @function
 
 [
   (modifier_predefined)
   (symfony_predefined_function)
 ] @function.builtin
+
+(modifier_parameter) @variable.parameter
+
+(symfony_function_parameter
+  (symfony_variable) @variable.parameter)
+
+(symfony_method_parameter
+  (symfony_variable) @variable.parameter)
 
 [
   (condition)
@@ -22,6 +33,8 @@
   "@import"
   "INCLUDE_TYPOSCRIPT"
 ] @keyword.import
+
+(condition_attribute) @attribute
 
 (cobject) @type.builtin
 
@@ -36,15 +49,9 @@
 
 [
   (string)
-  (multiline_value)
+  (multiline_value_content)
   (symfony_string)
 ] @string
-
-(assignment_line
-  "=" @operator)
-
-(reference_line
-  "=<" @operator)
 
 (deletion_line
   ">" @operator)
@@ -52,10 +59,11 @@
 (copy_line
   "<" @operator)
 
-(modification_line
-  ":=" @operator)
-
 [
+  "="
+  "=<"
+  ":="
+  "?."
   (symfony_condition_operator)
   (condition_bool_legacy)
   (constant_null_coalescing)
@@ -66,7 +74,10 @@
 ((symfony_condition_operator) @keyword.operator
   (#match? @keyword.operator "and|or|xor|not|not in|in|contains|starts with|ends with|matches"))
 
-"," @punctuation.delimiter
+[
+  ","
+  "."
+] @punctuation.delimiter
 
 [
   "("
@@ -76,6 +87,14 @@
   (block_punctuation)
 ] @punctuation.bracket
 
+(condition
+  "[" @punctuation.special)
+
+(condition
+  "]" @punctuation.special)
+
 (symfony_number) @number
 
 (symfony_boolean) @boolean
+
+(symfony_null) @constant.builtin
