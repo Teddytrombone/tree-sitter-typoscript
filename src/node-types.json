@@ -302,6 +302,11 @@
     }
   },
   {
+    "type": "identifier",
+    "named": false,
+    "fields": {}
+  },
+  {
     "type": "import",
     "named": true,
     "fields": {},
@@ -369,6 +374,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "modifier_function",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "modifier_parameter",
@@ -456,6 +466,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "reference_identifier",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "reference_line",
@@ -1149,6 +1164,10 @@
     "named": false
   },
   {
+    "type": "$",
+    "named": false
+  },
+  {
     "type": "&&",
     "named": false
   },
@@ -1245,6 +1264,10 @@
     "named": false
   },
   {
+    "type": "\\.",
+    "named": false
+  },
+  {
     "type": "]",
     "named": false
   },
@@ -1325,14 +1348,6 @@
     "named": false
   },
   {
-    "type": "identifier",
-    "named": false
-  },
-  {
-    "type": "identifier",
-    "named": true
-  },
-  {
     "type": "in",
     "named": false
   },
@@ -1365,10 +1380,6 @@
     "named": false
   },
   {
-    "type": "modifier_function",
-    "named": true
-  },
-  {
     "type": "modifier_predefined",
     "named": true
   },
@@ -1379,10 +1390,6 @@
   {
     "type": "page",
     "named": false
-  },
-  {
-    "type": "reference_identifier",
-    "named": true
   },
   {
     "type": "request",

@@ -3,9 +3,8 @@ const typoscriptObjects = require('./grammar/typoscript-objects.js');
 const typoscriptModifierFunctions = require('./grammar/typoscript-modifiers.js');
 const symfonyPredefined = require('./grammar/symfony-predefined.js');
 
-const IDENTIFIER_LIKE = /[A-Za-z0-9_\-\\]+/;
-const CONSTANT_NAME = /\$[a-zA-Z0-9_\-\\][a-zA-Z0-9_\-\.\\]*/;
-
+const IDENTIFIER_PART = '[a-zA-Z0-9_\\-]+';
+const IDENTIFIER_REGEX = new RegExp(IDENTIFIER_PART);
 
 module.exports = grammar({
     name: 'typoscript',
@@ -40,6 +39,21 @@ module.exports = grammar({
             functions.stringWithConstantsSeq($, '\''),
         ),
 
+        // Identifier
+        identifier: $ => seq(IDENTIFIER_REGEX, optional(repeat1(choice(IDENTIFIER_REGEX, '\\.', '.', '\\')))),
+
+        copy_identifier: $ => seq(optional('.'), alias($.identifier, 'identifier')),
+
+        _constant_identifier: $ => seq('$', alias($.identifier, 'identifier')),
+
+        // Constants
+        constant_null_coalescing: $ => '??',
+        _constant_simple: $ => seq('{', $._constant_identifier, '}'),
+        _constant_null: $ => seq('{', $._constant_identifier, repeat1(seq($.constant_null_coalescing, $._constant_identifier)), '}'),
+        constant: $ => choice($._constant_simple, $._constant_null),
+
+        // "Operators"
+
         assignment_line: $ => seq($.identifier, '=', optional(choice($.cobject, $.value)), '\n'),
 
         multiline_line: $ => seq($.identifier, $.multiline_value, optional($._comments), '\n'),
@@ -55,20 +69,19 @@ module.exports = grammar({
         modification_line: $ => seq(
             $.identifier,
             ':=',
-            choice($.modifier_predefined, $.modifier_function),
+            choice(prec(2, $.modifier_predefined), prec(1, $.modifier_function)),
             $.modifier_parameters,
             optional($._comments),
             '\n',
         ),
 
+        // Blocks
+
         configuration_block: $ => seq($.identifier, $.block),
 
         block: $ => seq(alias('{', $.block_punctuation), alias(repeat($._block_item), $.block_inner_content), alias('}', $.block_punctuation)),
 
-        constant_null_coalescing: $ => '??',
-        _constant_simple: $ => token(seq('{', CONSTANT_NAME, '}')),
-        _constant_null: $ => seq('{', CONSTANT_NAME, repeat1(seq($.constant_null_coalescing, CONSTANT_NAME)), '}'),
-        constant: $ => choice($._constant_simple, $._constant_null),
+        // "Values"
 
         value: $ => repeat1(choice($.constant, alias($.comment, 'fake_comment'), /[^\n]/, '{', '}')),
 
@@ -78,15 +91,11 @@ module.exports = grammar({
             ')',
         ),
 
-        identifier: $ => token(/(?:[a-zA-Z0-9_\-\\]+(?:\.[a-zA-Z0-9_\-\\]*)*)/),
-
-        copy_identifier: $ => seq(optional('.'), alias($.identifier, 'identifier')),
-
         cobject: $ => typoscriptObjects,
 
         modifier_predefined: $ => typoscriptModifierFunctions,
 
-        modifier_function: $ => IDENTIFIER_LIKE,
+        modifier_function: $ => /[A-Za-z0-9_\-\\]+/,
 
         modifier_parameters: $ => seq('(', functions.sep(',', $.modifier_parameter), ')'),
 
@@ -112,7 +121,7 @@ module.exports = grammar({
             alias('source', $.condition_attribute),
             '=',
             $.string,
-            optional(seq(/\s+/, alias($.modifier_function, $.condition_attribute), '=', $.string)),
+            optional(seq(/\s+/, alias(/[A-Za-z0-9_\-\\]+/, $.condition_attribute), '=', $.string)),
             '>',
         ),
 
